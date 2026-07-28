@@ -66,6 +66,18 @@
         .portfolio-item:hover .portfolio-img {
             transform: scale(1.05);
         }
+        
+        /* Ajuste para imágenes que no deben ser recortadas (capturas largas y reportes) */
+        .portfolio-img-contain {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-item:hover .portfolio-img-contain {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="min-h-screen relative text-white pb-20">
@@ -90,8 +102,8 @@
                 </p>
                 
                 <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold shadow-lg shadow-emerald-900/50 hover:bg-emerald-500 transition-all">
-                        <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV Completo
+                    <a href="Ricardo_Barrios_CV.pdf" target="_blank" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold shadow-lg shadow-emerald-900/50 hover:bg-emerald-500 transition-all">
+                        <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV en PDF
                     </a>
                     <a href="mailto:ricardobarriosmarketing@gmail.com" class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold hover:bg-white/10 transition-all">
                         <i data-lucide="mail" class="h-5 w-5"></i> Contactar
@@ -101,38 +113,35 @@
 
             <div class="glass-card w-full md:w-96">
                 <h3 class="text-sm font-bold text-white/80 mb-4 uppercase flex items-center gap-2">
-                    <i data-lucide="award" class="h-5 w-5 text-cyan-400"></i> Certificaciones Clave
+                    <i data-lucide="cpu" class="h-5 w-5 text-cyan-400"></i> Tech Stack & Skills
                 </h3>
                 <ul class="space-y-4">
-                    <li class="flex items-start gap-3">
-                        <div class="rounded-lg bg-white/5 p-2 mt-1"><i data-lucide="check-circle" class="h-4 w-4 text-emerald-400"></i></div>
-                        <div>
-                            <p class="text-sm font-semibold text-white">Google Ads & Digital Marketing</p>
-                            <p class="text-xs text-white/50">Google Academy / Alan Valdez</p>
-                        </div>
+                    <li class="flex items-center gap-3">
+                        <div class="rounded-lg bg-cyan-500/20 p-2"><i data-lucide="bar-chart-2" class="h-4 w-4 text-cyan-400"></i></div>
+                        <span class="text-sm text-white/80">Google Ads & Meta Ads (PMax, AIDA)</span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <div class="rounded-lg bg-white/5 p-2 mt-1"><i data-lucide="check-circle" class="h-4 w-4 text-emerald-400"></i></div>
-                        <div>
-                            <p class="text-sm font-semibold text-white">Marketing Automation</p>
-                            <p class="text-xs text-white/50">The GHL Roadmap / Zoho for Beginners</p>
-                        </div>
+                    <li class="flex items-center gap-3">
+                        <div class="rounded-lg bg-emerald-500/20 p-2"><i data-lucide="git-merge" class="h-4 w-4 text-emerald-400"></i></div>
+                        <span class="text-sm text-white/80">GoHighLevel (GHL) & Zoho CRM</span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <div class="rounded-lg bg-white/5 p-2 mt-1"><i data-lucide="check-circle" class="h-4 w-4 text-emerald-400"></i></div>
-                        <div>
-                            <p class="text-sm font-semibold text-white">Advanced SEO Certification</p>
-                            <p class="text-xs text-white/50">TheBigSEO Academy</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="rounded-lg bg-white/5 p-2 mt-1"><i data-lucide="check-circle" class="h-4 w-4 text-emerald-400"></i></div>
-                        <div>
-                            <p class="text-sm font-semibold text-white">English Proficiency (C1/C2)</p>
-                            <p class="text-xs text-white/50">Cevaz</p>
-                        </div>
+                    <li class="flex items-center gap-3">
+                        <div class="rounded-lg bg-blue-500/20 p-2"><i data-lucide="search" class="h-4 w-4 text-blue-400"></i></div>
+                        <span class="text-sm text-white/80">Technical SEO & Web Analytics</span>
                     </li>
                 </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="mb-8 border-b border-white/10 pb-4">
+                <h2 class="text-3xl font-bold flex items-center gap-3">
+                    <i data-lucide="award" class="h-8 w-8 text-emerald-400"></i> Curriculum y Certificaciones
+                </h2>
+                <p class="text-white/60 mt-2">Mi trayectoria profesional y avales académicos (Google, Zoho, TheBigSEO).</p>
+            </div>
+            
+            <div class="glass-card flex justify-center bg-white/5 p-4 md:p-8">
+                <img src="hf_20260722_221445_44f5ac06-3472-4fa4-8d2d-de9e825d61af_min.jpg" alt="Curriculum Vitae Ricardo Barrios" class="rounded-xl shadow-2xl max-w-full h-auto border border-white/10 hover:scale-[1.01] transition-transform duration-300">
             </div>
         </section>
 
@@ -157,38 +166,79 @@
         </section>
 
         <section>
-            <div class="mb-8 border-b border-white/10 pb-4">
-                <h2 class="text-3xl font-bold flex items-center gap-3">
-                    <i data-lucide="layout-grid" class="h-8 w-8 text-emerald-400"></i> Portafolio de Trabajos
-                </h2>
-                <p class="text-white/60 mt-2">Gestión de Redes Sociales, Campañas y Contenido Visual</p>
+            <div class="mb-14 text-center border-b border-white/10 pb-10">
+                <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
+                    <i data-lucide="layout-grid" class="h-8 w-8 text-emerald-400"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-white">Portafolio de trabajos</h1>
+                <p class="text-white/60 mt-4 max-w-2xl mx-auto">Una muestra visual detallada de mi experiencia, resultados y despliegue técnico.</p>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_2.png" alt="Social Media Posts" class="portfolio-img">
+            <div class="space-y-20">
+                
+                <div>
+                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Redes sociales</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="Portafolio_2.png" class="portfolio-img-contain p-2"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="Portafolio_3.png" class="portfolio-img-contain p-2"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_4.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_5.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_6.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_7.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="Portafolio_8.png" class="portfolio-img-contain p-2"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_9.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_10.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_12.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_14.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_16.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_17.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_18.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_20.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_21.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_23.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_24.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="Portafolio_26.jpg" class="portfolio-img"></div>
+                    </div>
                 </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_3.png" alt="Politecnico Santiago Mariño" class="portfolio-img">
+
+                <div>
+                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Sitios web</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_27.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_28.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="Portafolio_29.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_30.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="Portafolio_31.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_32.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="Portafolio_33.jpg" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_36.jpg" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_37.jpg" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="screencapture-buildboxpro-2026-07-22-16_35_04.jpg" class="portfolio-img-contain"></div>
+                    </div>
                 </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_4.jpg" alt="Instagram Profile" class="portfolio-img">
+
+                <div>
+                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Videos de Youtube</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Portafolio_34.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video p-2 flex items-center justify-center"><img src="Portafolio_35.jpg" class="portfolio-img-contain"></div>
+                    </div>
                 </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_5.jpg" alt="Post Educativo" class="portfolio-img">
+
+                <div>
+                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Resultados campañas Google Ads</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Campaign performance_1.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Campaign performance_2.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Campaign performance_3.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="Campaign performance_4.png" class="portfolio-img-contain"></div>
+                    </div>
                 </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_6.jpg" alt="Ingeniería" class="portfolio-img">
-                </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_7.jpg" alt="Grilla Instagram" class="portfolio-img">
-                </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_8.png" alt="Solidaridad Latina" class="portfolio-img">
-                </div>
-                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square">
-                    <img src="assets/Portafolio_9.jpg" alt="Perfil Solidaridad" class="portfolio-img">
-                </div>
+
             </div>
         </section>
 
@@ -196,80 +246,80 @@
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
                 <i data-lucide="bar-chart" class="h-8 w-8 text-cyan-400"></i> Performance Histórico
             </h2>
-            <div class="glass-card w-full">
+            <div class="glass-card w-full mb-10">
                 <h3 class="text-lg font-semibold text-white">Google Ads: Campañas Destacadas</h3>
                 <p class="text-sm text-white/60 mb-4">Muestra del volumen de conversiones y ROAS estimado (Proyectos B2B/B2C).</p>
                 <div id="chart-performance" style="height: 350px; width: 100%;"></div>
             </div>
-        </section>
 
-        <section class="max-w-4xl mx-auto">
-            <div class="glass-card !p-8 border-emerald-500/40 bg-gradient-to-b from-slate-900/90 to-emerald-950/40">
-                <div class="text-center mb-8">
-                    <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
-                        <i data-lucide="calculator" class="h-8 w-8 text-emerald-400"></i>
-                    </div>
-                    <h2 class="text-3xl font-bold text-white">Proyección de Resultados (ROI Calculator)</h2>
-                    <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto">
-                        Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas. 
-                        <br><span class="text-cyan-400 text-xs font-semibold">Infraestructura probada: Campañas PMax / Meta Ads + Creativos de alto CTR + Landing Pages (AIDA framework) con Ninja Forms.</span>
-                    </p>
-                </div>
-
-                <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
-                    
-                    <div class="mb-8">
-                        <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el Canal de Adquisición</label>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="calc-channel" value="google" class="peer sr-only" checked onchange="calculateROI()">
-                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 transition-all">
-                                    <p class="font-bold text-white">Google Ads (PMax)</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPA Histórico: ~$5.00</p>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="calc-channel" value="meta" class="peer sr-only" onchange="calculateROI()">
-                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all">
-                                    <p class="font-bold text-white">Facebook Ads</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPL Histórico: ~$7.00</p>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="calc-channel" value="omni" class="peer sr-only" onchange="calculateROI()">
-                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 transition-all">
-                                    <p class="font-bold text-white">Mix Omnicanal</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPL Promedio: ~$6.00</p>
-                                </div>
-                            </label>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card !p-8 border-emerald-500/40 bg-gradient-to-b from-slate-900/90 to-emerald-950/40">
+                    <div class="text-center mb-8">
+                        <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
+                            <i data-lucide="calculator" class="h-8 w-8 text-emerald-400"></i>
                         </div>
+                        <h2 class="text-3xl font-bold text-white">Proyección de Resultados (ROI Calculator)</h2>
+                        <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto">
+                            Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas. 
+                            <br><span class="text-cyan-400 text-xs font-semibold">Infraestructura probada: Campañas PMax / Meta Ads + Creativos de alto CTR + Landing Pages (AIDA framework) con Ninja Forms.</span>
+                        </p>
                     </div>
 
-                    <div class="mb-8">
-                        <div class="flex justify-between items-end mb-4">
-                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión Mensual Estimada</label>
-                            <span class="text-3xl font-mono font-bold text-emerald-400" id="calc-spend-display">$5,000</span>
-                        </div>
-                        <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de Leads</p>
-                            <div class="flex items-baseline gap-2 mt-1">
-                                <p class="text-2xl font-bold text-white" id="calc-leads">0</p>
-                                <p class="text-xs text-cyan-400">@ <span id="calc-cpl-display">$5</span>/ea</p>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
+                        
+                        <div class="mb-8">
+                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el Canal de Adquisición</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="calc-channel" value="google" class="peer sr-only" checked onchange="calculateROI()">
+                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 transition-all">
+                                        <p class="font-bold text-white">Google Ads (PMax)</p>
+                                        <p class="text-[10px] text-white/50 mt-1">CPA Histórico: ~$5.00</p>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="calc-channel" value="meta" class="peer sr-only" onchange="calculateROI()">
+                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all">
+                                        <p class="font-bold text-white">Facebook Ads</p>
+                                        <p class="text-[10px] text-white/50 mt-1">CPL Histórico: ~$7.00</p>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="calc-channel" value="omni" class="peer sr-only" onchange="calculateROI()">
+                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 transition-all">
+                                        <p class="font-bold text-white">Mix Omnicanal</p>
+                                        <p class="text-[10px] text-white/50 mt-1">CPL Promedio: ~$6.00</p>
+                                    </div>
+                                </label>
                             </div>
                         </div>
-                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Ventas Estimadas</p>
-                            <p class="text-2xl font-bold text-white mt-1" id="calc-sales">0</p>
-                            <p class="text-[9px] text-white/40 mt-1">Asumiendo 5% Cierre</p>
+
+                        <div class="mb-8">
+                            <div class="flex justify-between items-end mb-4">
+                                <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión Mensual Estimada</label>
+                                <span class="text-3xl font-mono font-bold text-emerald-400" id="calc-spend-display">$5,000</span>
+                            </div>
+                            <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
                         </div>
-                        <div class="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/30">
-                            <p class="text-[10px] text-emerald-200 uppercase tracking-wider">Revenue Proyectado</p>
-                            <p class="text-2xl font-bold text-emerald-400 mt-1" id="calc-revenue">$0</p>
-                            <p class="text-[9px] text-emerald-300/60 mt-1">Ticket Promedio $1,500</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
+                            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de Leads</p>
+                                <div class="flex items-baseline gap-2 mt-1">
+                                    <p class="text-2xl font-bold text-white" id="calc-leads">0</p>
+                                    <p class="text-xs text-cyan-400">@ <span id="calc-cpl-display">$5</span>/ea</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                <p class="text-[10px] text-white/50 uppercase tracking-wider">Ventas Estimadas</p>
+                                <p class="text-2xl font-bold text-white mt-1" id="calc-sales">0</p>
+                                <p class="text-[9px] text-white/40 mt-1">Asumiendo 5% Cierre</p>
+                            </div>
+                            <div class="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/30">
+                                <p class="text-[10px] text-emerald-200 uppercase tracking-wider">Revenue Proyectado</p>
+                                <p class="text-2xl font-bold text-emerald-400 mt-1" id="calc-revenue">$0</p>
+                                <p class="text-[9px] text-emerald-300/60 mt-1">Ticket Promedio $1,500</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -279,7 +329,6 @@
     </div>
 
     <script>
-        // Formateo de números
         const fmtInt = (n) => new Intl.NumberFormat("en-US").format(Math.round(n));
         const fmtMoney = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
         const fmtMoneyDec = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
@@ -288,13 +337,11 @@
             lucide.createIcons();
             renderAdsChart();
             
-            // Evento para la calculadora
             const slider = document.getElementById('calc-spend');
             slider.addEventListener('input', calculateROI);
-            calculateROI(); // Llamada inicial
+            calculateROI(); 
         };
 
-        // Lógica de la calculadora (Actualizada con tus datos reales)
         function calculateROI() {
             const spend = parseFloat(document.getElementById('calc-spend').value);
             const channelNodes = document.getElementsByName('calc-channel');
@@ -306,44 +353,36 @@
                 }
             }
             
-            // Actualizar display de inversión
             document.getElementById('calc-spend-display').innerText = fmtMoney(spend);
 
-            // CPLs extraídos de tu Data:
-            // Google Ads PMax: ~$5.00
-            // Meta Ads: ~$7.00
-            // Omnicanal: ~$6.00
             let currentCpl = 5.0; 
             if(channel === 'meta') currentCpl = 7.0;
             if(channel === 'omni') currentCpl = 6.0;
 
-            // Supuestos conservadores para justificar el Revenue
-            const closeRate = 0.05; // 5% tasa de conversión de Lead a Venta (Estándar B2B/High Ticket)
-            const averageTicket = 1500; // Ticket promedio hipotético basado en sector Fencing/Construcción
+            const closeRate = 0.05; 
+            const averageTicket = 1500; 
 
             const leads = spend / currentCpl;
             const sales = leads * closeRate;
             const revenue = sales * averageTicket;
 
-            // Inyectar en el HTML
             document.getElementById('calc-leads').innerText = fmtInt(leads);
             document.getElementById('calc-cpl-display').innerText = fmtMoneyDec(currentCpl);
             document.getElementById('calc-sales').innerText = fmtInt(sales);
             document.getElementById('calc-revenue').innerText = fmtMoney(revenue);
         }
 
-        // Gráfico de Plotly (Rendimiento) adaptado a tus tablas
         function renderAdsChart() {
             const campañas = ['Perf. Max (Fence Outlet)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Instalaciones)'];
             const conversiones = [7222, 2045, 649, 1394]; 
-            const cpAs = [5.49, 3.39, 3.06, 4.85]; // Tu costo por conversión real
+            const cpAs = [5.49, 3.39, 3.06, 4.85]; 
 
             const trace1 = {
                 x: campañas,
                 y: conversiones,
                 name: 'Volumen de Conversiones',
                 type: 'bar',
-                marker: { color: '#06b6d4', opacity: 0.9 }, // Cyan
+                marker: { color: '#06b6d4', opacity: 0.9 }, 
             };
 
             const trace2 = {
@@ -355,7 +394,7 @@
                 text: cpAs.map(val => '$' + val),
                 textposition: 'top center',
                 yaxis: 'y2',
-                line: { color: '#10b981', width: 3 }, // Emerald
+                line: { color: '#10b981', width: 3 }, 
                 marker: { size: 8, color: '#10b981' },
                 textfont: { color: '#10b981', size: 12, weight: 'bold' }
             };
