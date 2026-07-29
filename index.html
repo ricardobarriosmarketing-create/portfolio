@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricardo Barrios | Portafolio Growth Marketing</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -67,7 +70,6 @@
             transform: scale(1.05);
         }
         
-        /* Ajuste para imágenes que no deben ser recortadas */
         .portfolio-img-contain {
             width: 100%;
             height: 100%;
@@ -82,13 +84,16 @@
 </head>
 <body class="min-h-screen relative text-white pb-20">
 
+    <!-- Fondo -->
     <div class="pointer-events-none fixed inset-0 overflow-hidden z-0">
         <div class="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-cyan-600/10 blur-[120px]"></div>
         <div class="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-emerald-600/10 blur-[120px]"></div>
     </div>
 
+    <!-- Contenedor Principal -->
     <div class="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 space-y-20">
         
+        <!-- 1. HERO Y DESCARGA DE CV -->
         <section class="flex flex-col md:flex-row gap-10 items-center justify-between">
             <div class="max-w-2xl">
                 <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-400">
@@ -111,6 +116,7 @@
                 </div>
             </div>
 
+            <!-- Resumen Rápido -->
             <div class="glass-card w-full md:w-96">
                 <h3 class="text-sm font-bold text-white/80 mb-4 uppercase flex items-center gap-2">
                     <i data-lucide="cpu" class="h-5 w-5 text-cyan-400"></i> Tech Stack & Skills
@@ -132,6 +138,7 @@
             </div>
         </section>
 
+        <!-- EXHIBICIÓN DE CV Y CERTIFICACIONES -->
         <section>
             <div class="mb-8 border-b border-white/10 pb-4">
                 <h2 class="text-3xl font-bold flex items-center gap-3">
@@ -145,6 +152,7 @@
             </div>
         </section>
 
+        <!-- VIDEOS (SHOWREEL) -->
         <section>
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
                 <i data-lucide="play-circle" class="h-8 w-8 text-cyan-400"></i> Showreel & Casos de Éxito
@@ -165,6 +173,7 @@
             </div>
         </section>
 
+        <!-- GALERÍA DE PORTAFOLIO VISUAL -->
         <section>
             <div class="mb-14 text-center border-b border-white/10 pb-10">
                 <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
@@ -176,16 +185,17 @@
             
             <div class="space-y-20">
                 
+                <!-- CATEGORÍA 1: Redes Sociales (Filtrada a lista exacta) -->
                 <div>
                     <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Redes sociales</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="assets/Portafolio_4.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="assets/Portafolio_5.png" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_4.png" class="portfolio-img"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_5.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_6.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_9.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_10.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_12.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-square"><img src="assets/Portafolio_13.png" class="portfolio-img-contain p-2"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_13.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_14.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_16.png" class="portfolio-img"></div>
                         <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_17.png" class="portfolio-img"></div>
@@ -196,6 +206,7 @@
                     </div>
                 </div>
 
+                <!-- CATEGORÍA 2: Sitios Web (Filtrada a lista exacta) -->
                 <div>
                     <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Sitios web</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -208,6 +219,7 @@
                     </div>
                 </div>
 
+                <!-- CATEGORÍA 3: Videos de Youtube (Filtrada a lista exacta) -->
                 <div>
                     <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Videos de Youtube</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -215,19 +227,21 @@
                     </div>
                 </div>
 
+                <!-- CATEGORÍA 4: Campañas (Con codificación %20 para los espacios) -->
                 <div>
                     <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Resultados campañas Google Ads</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign_performance_1.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign_performance_2.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign_performance_3.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign_performance_4.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_1.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_2.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_3.png" class="portfolio-img-contain"></div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_4.png" class="portfolio-img-contain"></div>
                     </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- RENDIMIENTO DE ADS Y CALCULADORA -->
         <section>
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
                 <i data-lucide="bar-chart" class="h-8 w-8 text-cyan-400"></i> Performance Histórico
@@ -253,6 +267,7 @@
 
                     <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
                         
+                        <!-- Selector de Canal -->
                         <div class="mb-8">
                             <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el Canal de Adquisición</label>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -280,6 +295,7 @@
                             </div>
                         </div>
 
+                        <!-- Slider de Presupuesto -->
                         <div class="mb-8">
                             <div class="flex justify-between items-end mb-4">
                                 <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión Mensual Estimada</label>
@@ -288,6 +304,7 @@
                             <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
                         </div>
 
+                        <!-- Resultados -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
                             <div class="bg-white/5 rounded-xl p-4 border border-white/10">
                                 <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de Leads</p>
@@ -314,6 +331,7 @@
 
     </div>
 
+    <!-- Scripts lógicos -->
     <script>
         const fmtInt = (n) => new Intl.NumberFormat("en-US").format(Math.round(n));
         const fmtMoney = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
