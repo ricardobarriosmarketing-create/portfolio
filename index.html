@@ -3,425 +3,838 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ricardo Barrios | Portafolio Growth Marketing</title>
-    <!-- Tailwind CSS -->
+    <title>Ricardo Barrios | Growth & Performance Marketing Lead</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 
     <style>
-        body { 
-            background-color: #050b14; 
-            color: #FAFAFA; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            overflow-x: hidden;
+        :root{
+            --bg-0:#060a12;
+            --bg-1:#0c1420;
+            --bg-2:#111b2b;
+            --line:rgba(255,255,255,0.08);
+            --text-0:#f5f7fa;
+            --text-1:#93a3b8;
+            --blue:#22aaff;
+            --blue-soft:rgba(34,170,255,0.12);
+            --green:#12d199;
+            --green-soft:rgba(18,209,153,0.12);
         }
-        
-        .glass-card {
-            background-color: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        *{box-sizing:border-box;}
+        body{
+            background:var(--bg-0);
+            color:var(--text-0);
+            font-family:'Inter',sans-serif;
+            overflow-x:hidden;
+        }
+        h1,h2,h3,.font-display{ font-family:'Space Grotesk',sans-serif; letter-spacing:-0.02em; }
+        .mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em; }
+
+        .grain{
+            position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.35;
+            background-image: radial-gradient(circle at 20% 20%, rgba(34,170,255,0.08), transparent 40%),
+                               radial-gradient(circle at 80% 70%, rgba(18,209,153,0.08), transparent 40%);
         }
 
-        .glass-card:hover {
-            border-color: rgba(16, 185, 129, 0.4); 
-            transform: translateY(-2px);
+        .card{
+            background:var(--bg-1);
+            border:1px solid var(--line);
+            border-radius:14px;
+            position:relative;
+            overflow:hidden;
+            transition:border-color .25s ease, transform .25s ease;
+        }
+        .card:hover{ border-color:rgba(34,170,255,0.35); transform:translateY(-2px); }
+
+        .eyebrow{
+            display:inline-flex; align-items:center; gap:.5rem;
+            font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.12em;
+            text-transform:uppercase; color:var(--text-1);
+            border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem;
+        }
+        .eyebrow .dot{ width:6px; height:6px; border-radius:50%; }
+
+        /* Ticker */
+        .ticker-wrap{
+            width:100%; overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+            background:linear-gradient(90deg, rgba(34,170,255,0.06), rgba(18,209,153,0.06));
+        }
+        .ticker-track{ display:flex; width:max-content; animation:ticker 32s linear infinite; }
+        .ticker-track:hover{ animation-play-state:paused; }
+        @keyframes ticker{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+        .ticker-item{ display:flex; align-items:center; gap:.6rem; padding:.9rem 2.2rem; white-space:nowrap; font-family:'IBM Plex Mono',monospace; font-size:.8rem; border-right:1px solid var(--line); }
+
+        /* CTA buttons */
+        .btn-primary{
+            background:var(--green); color:#04120d; font-weight:700;
+            box-shadow:0 0 0 1px rgba(18,209,153,.4), 0 12px 30px -10px rgba(18,209,153,.55);
+        }
+        .btn-primary:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+        .btn-secondary{
+            border:1px solid rgba(34,170,255,.4); background:rgba(34,170,255,.08); color:var(--text-0);
+        }
+        .btn-secondary:hover{ background:rgba(34,170,255,.16); }
+
+        /* Floating CV button */
+        #float-cv{
+            position:fixed; right:1.25rem; bottom:1.25rem; z-index:50;
+            display:flex; align-items:center; gap:.55rem;
+            padding:.85rem 1.2rem; border-radius:999px;
+            background:var(--green); color:#04120d; font-weight:700; font-size:.85rem;
+            box-shadow:0 10px 30px -8px rgba(18,209,153,.6);
+            transform:translateY(120%); opacity:0; transition:transform .35s ease, opacity .35s ease;
+        }
+        #float-cv.show{ transform:translateY(0); opacity:1; }
+        #float-cv:hover{ filter:brightness(1.08); }
+
+        /* Bottleneck cards */
+        .bottleneck-card{ border-top:3px solid var(--blue); }
+        .bottleneck-card.g{ border-top-color:var(--green); }
+
+        /* Case study */
+        .case-num{
+            font-family:'Space Grotesk',sans-serif; font-size:2.25rem; font-weight:700;
+            -webkit-text-stroke:1px rgba(255,255,255,.25); color:transparent;
+        }
+        .flow-step{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; }
+
+        input[type=range]{ -webkit-appearance:none; width:100%; background:transparent; }
+        input[type=range]::-webkit-slider-thumb{
+            -webkit-appearance:none; height:22px; width:22px; border-radius:50%;
+            background:var(--green); cursor:pointer; margin-top:-8px;
+            box-shadow:0 0 15px rgba(18,209,153,.6);
+        }
+        input[type=range]::-webkit-slider-runnable-track{
+            width:100%; height:6px; cursor:pointer; background:rgba(255,255,255,.12); border-radius:999px;
         }
 
-        /* Estilos para la calculadora */
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
+        .portfolio-img{ width:100%; height:100%; object-fit:cover; border-radius:.75rem; transition:transform .3s ease; }
+        .portfolio-item:hover .portfolio-img{ transform:scale(1.05); }
+        .portfolio-img-contain{ width:100%; height:100%; object-fit:contain; border-radius:.75rem; transition:transform .3s ease; }
+        .portfolio-item:hover .portfolio-img-contain{ transform:scale(1.05); }
+
+        .nav-link{ color:var(--text-1); transition:color .2s ease; }
+        .nav-link:hover{ color:var(--text-0); }
+
+        /* Showreel — caso interactivo tipo "play" */
+        .showreel-case .play-overlay{
+            position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+            background:linear-gradient(180deg, rgba(6,10,18,0.10), rgba(6,10,18,0.72));
+            opacity:0; transition:opacity .25s ease;
         }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #10b981;
-            cursor: pointer;
-            margin-top: -10px;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+        .showreel-case:hover .play-overlay{ opacity:1; }
+        .showreel-case .play-btn{
+            width:64px; height:64px; border-radius:50%;
+            background:var(--green); color:#04120d;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 12px 30px -8px rgba(18,209,153,.6);
+            transform:scale(.9); transition:transform .25s ease;
         }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 6px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 9999px;
+        .showreel-case:hover .play-btn{ transform:scale(1); }
+        .case-badge{
+            position:absolute; top:.85rem; left:.85rem; z-index:2;
+            font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase;
+            background:rgba(6,10,18,0.78); border:1px solid var(--line); border-radius:999px;
+            padding:.35rem .75rem; color:var(--text-1);
         }
 
-        .portfolio-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 0.75rem;
-            transition: transform 0.3s ease;
+        /* Lightbox — recorrido frame a frame del workflow */
+        #lightbox{
+            position:fixed; inset:0; z-index:100; background:rgba(6,10,18,0.97);
+            display:none; align-items:center; justify-content:center; flex-direction:column;
+            padding:1.5rem; backdrop-filter:blur(6px);
         }
-        .portfolio-item:hover .portfolio-img {
-            transform: scale(1.05);
+        #lightbox.open{ display:flex; }
+        #lightbox-counter{ color:var(--text-1); font-size:.75rem; margin-bottom:1rem; }
+        #lightbox-close, .lightbox-arrow{
+            border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--text-0);
+            display:flex; align-items:center; justify-content:center; border-radius:50%;
+            transition:background .2s ease, border-color .2s ease;
         }
-        
-        .portfolio-img-contain {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 0.75rem;
-            transition: transform 0.3s ease;
+        #lightbox-close{ position:absolute; top:1.25rem; right:1.25rem; width:40px; height:40px; }
+        #lightbox-close:hover{ background:rgba(255,255,255,.1); }
+        .lightbox-arrow{ position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; }
+        .lightbox-arrow:hover{ background:rgba(34,170,255,.16); border-color:rgba(34,170,255,.4); }
+        #lightbox-prev{ left:.75rem; }
+        #lightbox-next{ right:.75rem; }
+        #lightbox-frame{
+            max-width:min(90vw, 1100px); max-height:58vh; width:100%;
+            display:flex; align-items:center; justify-content:center;
         }
-        .portfolio-item:hover .portfolio-img-contain {
-            transform: scale(1.05);
+        #lightbox-frame img{ max-width:100%; max-height:58vh; object-fit:contain; border-radius:.75rem; border:1px solid var(--line); }
+        #lightbox-caption{ max-width:640px; text-align:center; padding:0 3rem; }
+        @media (max-width:640px){
+            .lightbox-arrow{ width:38px; height:38px; }
+            #lightbox-caption{ padding:0 1rem; }
         }
+
+        ::selection{ background:var(--green); color:#04120d; }
     </style>
 </head>
-<body class="min-h-screen relative text-white pb-20">
+<body>
 
-    <!-- Fondo -->
-    <div class="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div class="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-cyan-600/10 blur-[120px]"></div>
-        <div class="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-emerald-600/10 blur-[120px]"></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 backdrop-blur-md" style="background:rgba(6,10,18,0.75); border-bottom:1px solid var(--line);">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+        <a href="#top" class="font-display font-bold text-lg">RB<span style="color:var(--green)">.</span></a>
+        <nav class="hidden md:flex items-center gap-7 text-sm">
+            <a href="#bottleneck" class="nav-link">El problema</a>
+            <a href="#stack" class="nav-link">Stack</a>
+            <a href="#casos" class="nav-link">Casos de estudio</a>
+            <a href="#portafolio" class="nav-link">Portafolio</a>
+            <a href="#dashboard" class="nav-link">Performance</a>
+        </nav>
+        <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-primary text-xs md:text-sm rounded-lg px-4 py-2 inline-flex items-center gap-2">
+            <i data-lucide="download" class="h-4 w-4"></i> CV
+        </a>
+    </div>
+</header>
+
+<div class="relative z-10 mx-auto max-w-7xl px-4 md:px-6" id="top">
+
+    <!-- HERO -->
+    <section class="pt-16 md:pt-24 pb-12">
+        <div class="max-w-3xl">
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> GROWTH &amp; PERFORMANCE MARKETING — NIVEL LEAD</span>
+            <h1 class="mt-6 text-4xl md:text-6xl font-bold leading-[1.05]">
+                No optimizo campañas.<br>
+                Diseño la máquina que las <span style="color:var(--green)">hace rentables</span>.
+            </h1>
+            <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
+                8 años dirigiendo equipos de growth, presupuestos de pauta y sistemas de atribución.
+                Mi trabajo no es "correr anuncios": es construir el sistema completo —pauta, funnel, CRM y reporting—
+                para que sepas exactamente de dónde viene cada dólar de ingreso que entra.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="mailto:ricardobarriosmarketing@gmail.com?subject=Agendemos%2020%20minutos" class="btn-primary rounded-lg px-6 py-3 text-sm inline-flex items-center gap-2">
+                    <i data-lucide="calendar" class="h-5 w-5"></i> Agenda una llamada de 20 min
+                </a>
+                <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
+                    <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV en PDF
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER (firma visual) -->
+    <div class="ticker-wrap -mx-4 md:-mx-6 mb-16">
+        <div class="ticker-track" id="ticker-track">
+            <!-- se duplica por JS para loop perfecto -->
+        </div>
     </div>
 
-    <!-- Contenedor Principal -->
-    <div class="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 space-y-20">
-        
-        <!-- 1. HERO Y DESCARGA DE CV -->
-        <section class="flex flex-col md:flex-row gap-10 items-center justify-between">
-            <div class="max-w-2xl">
-                <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-400">
-                    <i data-lucide="briefcase" class="h-4 w-4"></i>
-                    Growth & Digital Marketing Manager
-                </div>
-                <h1 class="mt-4 text-4xl md:text-6xl font-bold tracking-tight">Ricardo Barrios</h1>
-                <h2 class="mt-3 text-xl md:text-2xl text-cyan-400 font-medium">Data-Driven Strategies. High ROI. Automation.</h2>
-                <p class="mt-4 text-base text-white/70 leading-relaxed">
-                    Más de 8 años de experiencia liderando equipos multifuncionales, orquestando campañas rentables en Google/Meta Ads y construyendo embudos de automatización (GoHighLevel, Zoho) para escalar marcas globales.
-                </p>
-                
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold shadow-lg shadow-emerald-900/50 hover:bg-emerald-500 transition-all">
-                        <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV en PDF
-                    </a>
-                    <a href="mailto:ricardobarriosmarketing@gmail.com" class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold hover:bg-white/10 transition-all">
-                        <i data-lucide="mail" class="h-5 w-5"></i> Contactar
-                    </a>
-                </div>
+    <!-- BOTTLENECK -->
+    <section id="bottleneck" class="mb-24">
+        <div class="max-w-2xl mb-10">
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> DIAGNÓSTICO</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">El problema casi nunca es la pauta.</h2>
+            <p class="mt-3 text-white/60">Es no saber, con precisión de dólar, qué parte del sistema está fallando. Esto es lo que veo repetido en cada auditoría:</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="card bottleneck-card p-6">
+                <i data-lucide="split" class="h-6 w-6 mb-4" style="color:var(--blue)"></i>
+                <h3 class="font-display font-semibold text-lg">Presupuesto sin atribución real</h3>
+                <p class="mt-2 text-sm text-white/60">Se sabe cuánto se gastó. Nadie sabe qué canal, anuncio o landing generó la venta. Sin Hyros o GTM bien implementado, cada decisión de presupuesto es una apuesta.</p>
             </div>
+            <div class="card bottleneck-card p-6">
+                <i data-lucide="users" class="h-6 w-6 mb-4" style="color:var(--blue)"></i>
+                <h3 class="font-display font-semibold text-lg">Equipos operando sin SOPs</h3>
+                <p class="mt-2 text-sm text-white/60">El equipo creativo y de pauta trabaja por intuición, no por proceso. Sin KPIs claros en ClickUp o Monday, escalar solo multiplica el caos.</p>
+            </div>
+            <div class="card bottleneck-card g p-6">
+                <i data-lucide="filter" class="h-6 w-6 mb-4" style="color:var(--green)"></i>
+                <h3 class="font-display font-semibold text-lg">Landing pages que no cierran</h3>
+                <p class="mt-2 text-sm text-white/60">El tráfico llega, pero el funnel no está diseñado para convertir. Sin un framework de conversión (AIDA) y automatización en GHL, el lead se enfría.</p>
+            </div>
+        </div>
+    </section>
 
-            <!-- Resumen Rápido -->
-            <div class="glass-card w-full md:w-96">
-                <h3 class="text-sm font-bold text-white/80 mb-4 uppercase flex items-center gap-2">
-                    <i data-lucide="cpu" class="h-5 w-5 text-cyan-400"></i> Tech Stack & Skills
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-center gap-3">
-                        <div class="rounded-lg bg-cyan-500/20 p-2"><i data-lucide="bar-chart-2" class="h-4 w-4 text-cyan-400"></i></div>
-                        <span class="text-sm text-white/80">Google Ads & Meta Ads (PMax, AIDA)</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="rounded-lg bg-emerald-500/20 p-2"><i data-lucide="git-merge" class="h-4 w-4 text-emerald-400"></i></div>
-                        <span class="text-sm text-white/80">GoHighLevel (GHL) & Zoho CRM</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="rounded-lg bg-blue-500/20 p-2"><i data-lucide="search" class="h-4 w-4 text-blue-400"></i></div>
-                        <span class="text-sm text-white/80">Technical SEO & Web Analytics</span>
-                    </li>
+    <!-- STACK -->
+    <section id="stack" class="mb-24">
+        <div class="max-w-2xl mb-10">
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> INFRAESTRUCTURA</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">El sistema que opero, no solo las herramientas.</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="card p-6">
+                <p class="mono text-xs" style="color:var(--blue)">01 · PAUTA &amp; ATRIBUCIÓN</p>
+                <h3 class="mt-3 font-display font-semibold">Adquisición medible</h3>
+                <ul class="mt-3 space-y-2 text-sm text-white/60">
+                    <li>Google Ads (PMax, Search)</li>
+                    <li>Meta Ads Manager</li>
+                    <li>Google Tag Manager</li>
+                    <li>Hyros (atribución multitoque)</li>
                 </ul>
             </div>
-        </section>
-
-        <!-- EXHIBICIÓN DE CV Y CERTIFICACIONES -->
-        <section>
-            <div class="mb-8 border-b border-white/10 pb-4">
-                <h2 class="text-3xl font-bold flex items-center gap-3">
-                    <i data-lucide="award" class="h-8 w-8 text-emerald-400"></i> Curriculum y Certificaciones
-                </h2>
-                <p class="text-white/60 mt-2">Mi trayectoria profesional y avales académicos (Google, Zoho, TheBigSEO).</p>
+            <div class="card p-6">
+                <p class="mono text-xs" style="color:var(--green)">02 · AUTOMATIZACIÓN &amp; CRM</p>
+                <h3 class="mt-3 font-display font-semibold">Funnels que trabajan solos</h3>
+                <ul class="mt-3 space-y-2 text-sm text-white/60">
+                    <li>GoHighLevel (GHL)</li>
+                    <li>Zoho CRM</li>
+                    <li>Secuencias &amp; nurturing</li>
+                    <li>Formularios AIDA (Ninja Forms)</li>
+                </ul>
             </div>
-            
-            <div class="glass-card flex justify-center bg-white/5 p-4 md:p-8">
-                <img src="assets/hf_20260722_221445_44f5ac06-3472-4fa4-8d2d-de9e825d61af_min.png" alt="Curriculum Vitae Ricardo Barrios" class="rounded-xl shadow-2xl max-w-full h-auto border border-white/10 hover:scale-[1.01] transition-transform duration-300">
+            <div class="card p-6">
+                <p class="mono text-xs" style="color:var(--blue)">03 · OPERACIONES</p>
+                <h3 class="mt-3 font-display font-semibold">Equipos que no dependen de mí</h3>
+                <ul class="mt-3 space-y-2 text-sm text-white/60">
+                    <li>ClickUp</li>
+                    <li>Monday.com</li>
+                    <li>SOPs documentados</li>
+                    <li>KPIs por rol y por canal</li>
+                </ul>
             </div>
-        </section>
-
-        <!-- VIDEOS (SHOWREEL) -->
-        <section>
-            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
-                <i data-lucide="play-circle" class="h-8 w-8 text-cyan-400"></i> Showreel & Casos de Éxito
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card !p-3">
-                    <div class="aspect-video w-full">
-                        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/PvO3HO6_FIA" title="Resumen de Gestión" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <p class="mt-3 text-center text-sm font-bold text-white">Resumen de Gestión y Liderazgo</p>
-                </div>
-                <div class="glass-card !p-3">
-                    <div class="aspect-[9/16] md:aspect-video w-full max-h-[400px] mx-auto">
-                        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/mE6ITBb9-ZE" title="Análisis Técnico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <p class="mt-3 text-center text-sm font-bold text-white">Análisis Técnico y Setup de Automatizaciones</p>
-                </div>
+            <div class="card p-6">
+                <p class="mono text-xs" style="color:var(--green)">04 · SEO &amp; ANALÍTICA</p>
+                <h3 class="mt-3 font-display font-semibold">Visibilidad orgánica</h3>
+                <ul class="mt-3 space-y-2 text-sm text-white/60">
+                    <li>SEO técnico</li>
+                    <li>Web analytics</li>
+                    <li>Reporting ejecutivo</li>
+                    <li>Testing continuo de creativos</li>
+                </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- GALERÍA DE PORTAFOLIO VISUAL -->
-        <section>
-            <div class="mb-14 text-center border-b border-white/10 pb-10">
-                <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
-                    <i data-lucide="layout-grid" class="h-8 w-8 text-emerald-400"></i>
-                </div>
-                <h1 class="text-4xl md:text-5xl font-bold text-white">Portafolio de trabajos</h1>
-                <p class="text-white/60 mt-4 max-w-2xl mx-auto">Una muestra visual detallada de mi experiencia, resultados y despliegue técnico.</p>
-            </div>
-            
-            <div class="space-y-20">
-                
-                <!-- CATEGORÍA 1: Redes Sociales (Filtrada a lista exacta) -->
-                <div>
-                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Redes sociales</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_4.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_5.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_6.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_9.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_10.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_12.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_13.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_14.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_16.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_17.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_20.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_21.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_23.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_24.png" class="portfolio-img"></div>
-                    </div>
-                </div>
+    <!-- CASOS DE ESTUDIO -->
+    <section id="casos" class="mb-24">
+        <div class="max-w-2xl mb-10">
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> EVIDENCIA, NO PROMESAS</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Casos de estudio</h2>
+            <p class="mt-3 text-white/60">Cada caso sigue el mismo framework: el contexto en el que entré, la arquitectura que construí, y el resultado financiero que dejó atrás.</p>
+        </div>
 
-                <!-- CATEGORÍA 2: Sitios Web (Filtrada a lista exacta) -->
-                <div>
-                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Sitios web</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_29.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_31.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_33.png" class="portfolio-img"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_36.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_37.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/screencapture-buildboxpro-2026-07-22-16_35_04.png" class="portfolio-img-contain"></div>
-                    </div>
-                </div>
-
-                <!-- CATEGORÍA 3: Videos de Youtube (Filtrada a lista exacta) -->
-                <div>
-                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Videos de Youtube</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_35.png" class="portfolio-img-contain"></div>
-                    </div>
-                </div>
-
-                <!-- CATEGORÍA 4: Campañas (Con codificación %20 para los espacios) -->
-                <div>
-                    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Resultados campañas Google Ads</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_1.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_2.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_3.png" class="portfolio-img-contain"></div>
-                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_4.png" class="portfolio-img-contain"></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- RENDIMIENTO DE ADS Y CALCULADORA -->
-        <section>
-            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
-                <i data-lucide="bar-chart" class="h-8 w-8 text-cyan-400"></i> Performance Histórico
-            </h2>
-            <div class="glass-card w-full mb-10">
-                <h3 class="text-lg font-semibold text-white">Google Ads: Campañas Destacadas</h3>
-                <p class="text-sm text-white/60 mb-4">Muestra del volumen de conversiones y ROAS estimado (Proyectos B2B/B2C).</p>
-                <div id="chart-performance" style="height: 350px; width: 100%;"></div>
-            </div>
-
-            <div class="max-w-4xl mx-auto">
-                <div class="glass-card !p-8 border-emerald-500/40 bg-gradient-to-b from-slate-900/90 to-emerald-950/40">
-                    <div class="text-center mb-8">
-                        <div class="mx-auto w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
-                            <i data-lucide="calculator" class="h-8 w-8 text-emerald-400"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold text-white">Proyección de Resultados (ROI Calculator)</h2>
-                        <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto">
-                            Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas. 
-                            <br><span class="text-cyan-400 text-xs font-semibold">Infraestructura probada: Campañas PMax / Meta Ads + Creativos de alto CTR + Landing Pages (AIDA framework) con Ninja Forms.</span>
-                        </p>
-                    </div>
-
-                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
-                        
-                        <!-- Selector de Canal -->
-                        <div class="mb-8">
-                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el Canal de Adquisición</label>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="calc-channel" value="google" class="peer sr-only" checked onchange="calculateROI()">
-                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 transition-all">
-                                        <p class="font-bold text-white">Google Ads (PMax)</p>
-                                        <p class="text-[10px] text-white/50 mt-1">CPA Histórico: ~$5.00</p>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="calc-channel" value="meta" class="peer sr-only" onchange="calculateROI()">
-                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all">
-                                        <p class="font-bold text-white">Facebook Ads</p>
-                                        <p class="text-[10px] text-white/50 mt-1">CPL Histórico: ~$7.00</p>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="calc-channel" value="omni" class="peer sr-only" onchange="calculateROI()">
-                                    <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 transition-all">
-                                        <p class="font-bold text-white">Mix Omnicanal</p>
-                                        <p class="text-[10px] text-white/50 mt-1">CPL Promedio: ~$6.00</p>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Slider de Presupuesto -->
-                        <div class="mb-8">
-                            <div class="flex justify-between items-end mb-4">
-                                <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión Mensual Estimada</label>
-                                <span class="text-3xl font-mono font-bold text-emerald-400" id="calc-spend-display">$5,000</span>
-                            </div>
-                            <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
-                        </div>
-
-                        <!-- Resultados -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                                <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de Leads</p>
-                                <div class="flex items-baseline gap-2 mt-1">
-                                    <p class="text-2xl font-bold text-white" id="calc-leads">0</p>
-                                    <p class="text-xs text-cyan-400">@ <span id="calc-cpl-display">$5</span>/ea</p>
-                                </div>
-                            </div>
-                            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                                <p class="text-[10px] text-white/50 uppercase tracking-wider">Ventas Estimadas</p>
-                                <p class="text-2xl font-bold text-white mt-1" id="calc-sales">0</p>
-                                <p class="text-[9px] text-white/40 mt-1">Asumiendo 5% Cierre</p>
-                            </div>
-                            <div class="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/30">
-                                <p class="text-[10px] text-emerald-200 uppercase tracking-wider">Revenue Proyectado</p>
-                                <p class="text-2xl font-bold text-emerald-400 mt-1" id="calc-revenue">$0</p>
-                                <p class="text-[9px] text-emerald-300/60 mt-1">Ticket Promedio $1,500</p>
-                            </div>
+        <div class="space-y-6">
+            <!-- CASO 1: datos reales del dashboard -->
+            <div class="card p-6 md:p-8">
+                <div class="flex items-start justify-between gap-6 flex-wrap">
+                    <div class="flex items-start gap-5">
+                        <span class="case-num">01</span>
+                        <div>
+                            <h3 class="font-display font-semibold text-xl">
+                                <a href="https://www.vilofence.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:inherit">Vilo Fence</a> — Performance Max
+                            </h3>
+                            <p class="text-xs text-white/50 mt-1">Vertical: Fencing / Gates — Home Services local (Tampa, FL)</p>
                         </div>
                     </div>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold" style="color:var(--green)">7,222</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider">conversiones @ $5.49 CPA</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70">La cuenta dependía de campañas de Search con techo de escala y sin estructura de feed para e-commerce local.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70">Rediseño completo de la campaña como Performance Max, segmentación por grupos de activos y testing de creativos de alto CTR.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--green)">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70">7,222 conversiones a un CPA de $5.49 — el volumen más alto entre las 4 líneas de campaña activas de la cuenta.</p>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4" style="border-top:1px solid var(--line)">
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
+                        <img src="assets/Vilo_Fence_Custom_Gates.png" alt="Vilo Fence - Custom Gates in Tampa" class="portfolio-img">
+                    </div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
+                        <img src="assets/Vilo_Fence_Materials.png" alt="Vilo Fence - Premium Fence Materials in Tampa" class="portfolio-img">
+                    </div>
                 </div>
             </div>
-        </section>
 
+            <!-- CASO 2 y 3: placeholders para que Ricardo complete -->
+            <div class="card p-6 md:p-8">
+                <div class="flex items-start justify-between gap-6 flex-wrap">
+                    <div class="flex items-start gap-5">
+                        <span class="case-num">02</span>
+                        <div>
+                            <h3 class="font-display font-semibold text-xl">Luis Feliz Caballero — "El Trading No Es Difícil"</h3>
+                            <p class="text-xs text-white/50 mt-1">Vertical: Educación financiera / comunidad de trading (Forex, cripto, futuros) — Puerto Rico &amp; LATAM</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold" style="color:var(--green)">$225,216.50</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider">revenue atribuido (feb–may 2026)</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70">Comunidad de trading en expansión activa en Puerto Rico y Latinoamérica, con necesidad de escalar la adquisición de estudiantes sin perder rentabilidad por cada dólar invertido en pauta.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70">Gestión directa del presupuesto de marketing digital mes a mes, con atribución de revenue por periodo para tomar decisiones de escalado o corte con datos, no con intuición.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--green)">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70">$225,216.50 en revenue atribuido contra $93,516.00 invertidos en 4 meses (feb–may 2026) — un ROAS de 2.41x sostenido mes a mes.</p>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <div id="chart-caso2" style="height: 260px; width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="card p-6 md:p-8">
+                <div class="flex items-start justify-between gap-6 flex-wrap">
+                    <div class="flex items-start gap-5">
+                        <span class="case-num">03</span>
+                        <div>
+                            <h3 class="font-display font-semibold text-xl">SOS Support <span class="text-white/40 font-normal">(hoy <a href="https://vigilanttechs.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:var(--blue)">Vigilant IT</a>)</span></h3>
+                            <p class="text-xs text-white/50 mt-1">Vertical: Soporte IT gestionado (Managed IT Services) — Estados Unidos</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold" style="color:var(--green)">$90K → $200K</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider">revenue mensual (sep 2021 → prom. 2022–2024)</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70">Empresa de soporte IT en Estados Unidos, operando bajo estrictas políticas de privacidad financiera: sin acceso directo a la parte contable ni al volumen de llamadas entrantes a oficina.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70">Gestión sostenida de la estrategia de adquisición durante más de dos años, sin visibilidad total del funnel por las restricciones internas de la compañía — trabajando con los indicadores disponibles para sostener el crecimiento mes a mes.</p>
+                    </div>
+                    <div>
+                        <p class="flow-step" style="color:var(--green)">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70">Revenue mensual de la compañía escaló de $90,000 en septiembre de 2021 a un promedio de $200,000/mes sostenido entre 2022 y 2024, durante el periodo de mi gestión.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Y CERTIFICACIONES -->
+    <section class="mb-24">
+        <div class="max-w-2xl mb-8">
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> RESPALDO</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Curriculum y certificaciones</h2>
+            <p class="mt-3 text-white/60">Trayectoria y avales académicos: Google, Zoho, TheBigSEO.</p>
+        </div>
+        <div class="card flex justify-center bg-white/5 p-4 md:p-8">
+            <img src="assets/hf_20260722_221445_44f5ac06-3472-4fa4-8d2d-de9e825d61af_min.png" alt="Curriculum Vitae Ricardo Barrios" class="rounded-xl shadow-2xl max-w-full h-auto border border-white/10">
+        </div>
+    </section>
+
+    <!-- SHOWREEL -->
+    <section class="mb-24">
+        <div class="max-w-2xl mb-8">
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> EN VIVO</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Showreel &amp; casos explicados</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card !p-3">
+                <div class="aspect-video w-full">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/PvO3HO6_FIA" title="Resumen de Gestión" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p class="mt-3 text-center text-sm font-semibold">Resumen de gestión y liderazgo</p>
+            </div>
+            <div class="card !p-3">
+                <div class="aspect-[9/16] md:aspect-video w-full max-h-[400px] mx-auto">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/mE6ITBb9-ZE" title="Análisis Técnico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p class="mt-3 text-center text-sm font-semibold">Análisis técnico y setup de automatizaciones</p>
+            </div>
+
+            <div class="card !p-3 md:col-span-2 showreel-case relative cursor-pointer" onclick="openLightbox(0)" role="button" aria-label="Ver recorrido paso a paso del workflow de GHL">
+                <div class="aspect-video w-full relative rounded-lg overflow-hidden">
+                    <span class="case-badge">GHL Workflow · 14 pasos</span>
+                    <img src="assets/Captura_GHL_1.png" alt="Automatización de email marketing en Go High Level" class="w-full h-full object-cover">
+                    <div class="play-overlay">
+                        <div class="play-btn"><i data-lucide="play" class="h-7 w-7" style="margin-left:3px"></i></div>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <p class="text-sm font-semibold">Automatización de email marketing — 85 inscritos, 41K+ contactos segmentados</p>
+                    <p class="mt-1 text-xs text-white/50">Haz clic para recorrer, paso a paso, el workflow completo en Go High Level</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX: recorrido del caso GHL -->
+    <div id="lightbox" onclick="if(event.target===this) closeLightbox()">
+        <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar"><i data-lucide="x" class="h-5 w-5"></i></button>
+        <button id="lightbox-prev" class="lightbox-arrow" onclick="lightboxNav(-1)" aria-label="Anterior"><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+        <button id="lightbox-next" class="lightbox-arrow" onclick="lightboxNav(1)" aria-label="Siguiente"><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+
+        <span id="lightbox-counter" class="mono"></span>
+        <div id="lightbox-frame"><img id="lightbox-img" src="" alt=""></div>
+        <div id="lightbox-caption" class="mt-5">
+            <p class="flow-step" id="lightbox-step-label" style="color:var(--blue)"></p>
+            <p class="mt-2 text-sm text-white/70" id="lightbox-step-text"></p>
+        </div>
     </div>
 
-    <!-- Scripts lógicos -->
-    <script>
-        const fmtInt = (n) => new Intl.NumberFormat("en-US").format(Math.round(n));
-        const fmtMoney = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
-        const fmtMoneyDec = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
+    <!-- PORTAFOLIO -->
+    <section id="portafolio" class="mb-24">
+        <div class="max-w-2xl mb-10">
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> MUESTRA VISUAL</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Portafolio de trabajos</h2>
+            <p class="mt-3 text-white/60">Despliegue creativo, técnico y de resultados a través de canales.</p>
+        </div>
 
-        window.onload = () => {
-            lucide.createIcons();
-            renderAdsChart();
-            
-            const slider = document.getElementById('calc-spend');
-            slider.addEventListener('input', calculateROI);
-            calculateROI(); 
+        <div class="space-y-16">
+            <div>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Redes sociales</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_4.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_5.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_6.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_9.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_10.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_12.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_13.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_14.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_16.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_17.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_20.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_21.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_23.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_24.png" class="portfolio-img"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Sitios web</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_29.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_31.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_33.png" class="portfolio-img"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_36.png" class="portfolio-img-contain"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_37.png" class="portfolio-img-contain"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/screencapture-buildboxpro-2026-07-22-16_35_04.png" class="portfolio-img-contain"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Videos de YouTube</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_35.png" class="portfolio-img-contain"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--green)">Resultados campañas Google Ads</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_1.png" class="portfolio-img-contain"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_2.png" class="portfolio-img-contain"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_3.png" class="portfolio-img-contain"></div>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_4.png" class="portfolio-img-contain"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD + CALCULADORA (al final) -->
+    <section id="dashboard" class="mb-20">
+        <div class="max-w-2xl mb-10">
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> LA PRUEBA EN NÚMEROS</span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Dashboard de performance</h2>
+            <p class="mt-3 text-white/60">Volumen de conversiones vs. costo de adquisición, campaña por campaña.</p>
+        </div>
+
+        <div class="card w-full mb-10 p-6">
+            <h3 class="text-lg font-display font-semibold">Google Ads: campañas destacadas</h3>
+            <p class="text-sm text-white/60 mb-4">Muestra del volumen de conversiones y CPA real (proyectos B2B/B2C).</p>
+            <div id="chart-performance" style="height: 350px; width: 100%;"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="card !p-8" style="border-color:rgba(18,209,153,0.35); background:linear-gradient(180deg, rgba(17,27,43,0.9), rgba(6,30,24,0.5));">
+                <div class="text-center mb-8">
+                    <div class="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-4" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
+                        <i data-lucide="calculator" class="h-7 w-7" style="color:var(--green)"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold font-display">Proyección de resultados (ROI Calculator)</h2>
+                    <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto">
+                        Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas.
+                        <br><span style="color:var(--blue)" class="text-xs font-semibold">Infraestructura probada: PMax / Meta Ads + creativos de alto CTR + landing pages (framework AIDA) con Ninja Forms.</span>
+                    </p>
+                </div>
+
+                <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
+                    <div class="mb-8">
+                        <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el canal de adquisición</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="calc-channel" value="google" class="peer sr-only" checked onchange="calculateROI()">
+                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 transition-all">
+                                    <p class="font-bold text-white">Google Ads (PMax)</p>
+                                    <p class="text-[10px] text-white/50 mt-1">CPA histórico: ~$5.00</p>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="calc-channel" value="meta" class="peer sr-only" onchange="calculateROI()">
+                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all">
+                                    <p class="font-bold text-white">Facebook Ads</p>
+                                    <p class="text-[10px] text-white/50 mt-1">CPL histórico: ~$7.00</p>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="calc-channel" value="omni" class="peer sr-only" onchange="calculateROI()">
+                                <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 transition-all">
+                                    <p class="font-bold text-white">Mix omnicanal</p>
+                                    <p class="text-[10px] text-white/50 mt-1">CPL promedio: ~$6.00</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between items-end mb-4">
+                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión mensual estimada</label>
+                            <span class="text-3xl mono font-bold" style="color:var(--green)" id="calc-spend-display">$5,000</span>
+                        </div>
+                        <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
+                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de leads</p>
+                            <div class="flex items-baseline gap-2 mt-1">
+                                <p class="text-2xl font-bold text-white" id="calc-leads">0</p>
+                                <p class="text-xs" style="color:var(--blue)">@ <span id="calc-cpl-display">$5</span>/ea</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Ventas estimadas</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="calc-sales">0</p>
+                            <p class="text-[9px] text-white/40 mt-1">Asumiendo 5% de cierre</p>
+                        </div>
+                        <div class="rounded-xl p-4" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
+                            <p class="text-[10px] uppercase tracking-wider" style="color:#8ef0d4">Revenue proyectado</p>
+                            <p class="text-2xl font-bold mt-1" style="color:var(--green)" id="calc-revenue">$0</p>
+                            <p class="text-[9px] mt-1" style="color:#8ef0d4a0">Ticket promedio $1,500</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="mb-16">
+        <div class="card p-10 md:p-14 text-center" style="background:linear-gradient(135deg, rgba(34,170,255,0.08), rgba(18,209,153,0.10));">
+            <h2 class="text-3xl md:text-4xl font-bold font-display">¿Vas a seguir pagando por tráfico o vas a empezar a medir revenue?</h2>
+            <p class="mt-4 text-white/70 max-w-xl mx-auto">20 minutos son suficientes para que te diga, en base a tu cuenta, dónde está la fuga de presupuesto.</p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="mailto:ricardobarriosmarketing@gmail.com?subject=Agendemos%2020%20minutos" class="btn-primary rounded-lg px-8 py-3.5 text-sm inline-flex items-center gap-2">
+                    <i data-lucide="calendar" class="h-5 w-5"></i> Agenda tu llamada ahora
+                </a>
+                <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-secondary rounded-lg px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2">
+                    <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50" style="border-color:var(--line)">
+        <p>© 2026 Ricardo Barrios — Growth &amp; Performance Marketing</p>
+        <a href="mailto:ricardobarriosmarketing@gmail.com" class="nav-link inline-flex items-center gap-2"><i data-lucide="mail" class="h-4 w-4"></i> ricardobarriosmarketing@gmail.com</a>
+    </footer>
+</div>
+
+<!-- Botón flotante CV -->
+<a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" id="float-cv">
+    <i data-lucide="download" class="h-4 w-4"></i> Descargar CV
+</a>
+
+<script>
+    const fmtInt = (n) => new Intl.NumberFormat("en-US").format(Math.round(n));
+    const fmtMoney = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+    const fmtMoneyDec = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
+
+    window.onload = () => {
+        lucide.createIcons();
+        renderAdsChart();
+        renderCaso2Chart();
+        buildTicker();
+
+        const slider = document.getElementById('calc-spend');
+        slider.addEventListener('input', calculateROI);
+        calculateROI();
+
+        const floatBtn = document.getElementById('float-cv');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) floatBtn.classList.add('show');
+            else floatBtn.classList.remove('show');
+        });
+    };
+
+    // --- Lightbox: caso GHL paso a paso ---
+    const ghlFrames = [
+        { src:'assets/Captura_GHL_1.png', title:'Trigger & exclusión inicial', text:'El flujo arranca cuando se añade el tag de nuevo lead. Antes de enviar nada, un nodo condicional excluye a quien ya tiene el tag de una oferta anterior, evitando duplicar mensajes a leads ya trabajados.' },
+        { src:'assets/Captura_GHL_2.png', title:'Checkpoint de re-etiquetado', text:'Después del primer correo y una espera, el flujo vuelve a preguntar si el contacto ya tiene el tag del evento vigente, para no seguir enviando la secuencia a quien ya se marcó como inscrito.' },
+        { src:'assets/Captura_GHL_3.png', title:'Sincronización por fecha fija', text:'Configuré los nodos de espera para disparar en una fecha y hora exacta —no en un delay relativo—, clave para alinear los correos de cuenta regresiva con el horario real del evento en vivo.' },
+        { src:'assets/Captura_GHL_4.png', title:'Segmentación de exclusión', text:'Sobre una base de más de 41,000 contactos, apliqué filtros anidados para excluir a quienes ya pertenecían a una oferta o membresía anterior, protegiendo la reputación del dominio y la experiencia de clientes existentes.' },
+        { src:'assets/Captura_GHL_5.png', title:'Verificación del segmento final', text:'Tras aplicar los filtros, validé el conteo resultante de contactos elegibles antes de activar cualquier envío masivo — un control de calidad sobre la audiencia real que recibiría la campaña.' },
+        { src:'assets/Captura_GHL_7.png', title:'Historial de ejecución', text:'Cada acción masiva (tags y correos) queda registrada con su estado y responsable, lo que permite auditar en tiempo real qué se envió, cuándo y a quién, sin depender de suposiciones.' },
+        { src:'assets/Captura_GHL_8.png', title:'Lógica de la condición', text:'Detalle del nodo de exclusión: la condición se cumple solo si el contacto tiene todos los tags seleccionados dentro de la rama, evitando falsos positivos en la segmentación.' },
+        { src:'assets/Captura_GHL_9.png', title:'Control anti-saturación', text:'Activé la opción que salta automáticamente los envíos salientes pendientes si la fecha ya pasó, evitando que un contacto reciba correos de urgencia fuera de tiempo.' },
+        { src:'assets/Captura_GHL_10.png', title:'Repetición del patrón por día de evento', text:'El mismo bloque de espera + verificación de tag se replica para cada uno de los 3 días del LIVE TRAINING, ajustando solo la fecha y el copy del correo correspondiente.' },
+        { src:'assets/Captura_GHL_11.png', title:'Flujo post-compra: recordatorios previos', text:'Para quienes ya compraron, programé recordatorios anclados a la fecha del evento (7 días antes), incluyendo el link de acceso y una invitación a referir a un amigo.' },
+        { src:'assets/Captura_GHL_12.png', title:'Tracking de conversión', text:'Cada compra dispara el registro automático en una hoja de cálculo y la creación de una oportunidad en el CRM, generando trazabilidad completa de cada venta sin trabajo manual.' },
+        { src:'assets/Captura_GHL_Recovery.png', title:'Flujo de Recovery — enrutamiento', text:'Los leads que hicieron optin pero no compraron se reincorporan a un workflow de asignación general de leads, dándole visibilidad al equipo comercial sobre ellos también.' },
+        { src:'assets/Captura_GHL_Recovery_2.png', title:'Secuencia de recuperación (3 correos)', text:'Diseñé una secuencia de 3 correos espaciados en días consecutivos para recuperar conversiones de quienes mostraron interés (optin) pero no completaron la compra.' },
+        { src:'assets/Captura_GHL_Recovery_3.png', title:'Trigger del flujo de Recovery', text:'El disparador es el envío del formulario de registro al evento; desde ahí el contacto entra automáticamente a la secuencia de recuperación en paralelo al resto del funnel.' },
+    ];
+    let lightboxIndex = 0;
+
+    function renderLightboxFrame(){
+        const total = ghlFrames.length;
+        const frame = ghlFrames[lightboxIndex];
+        document.getElementById('lightbox-img').src = frame.src;
+        document.getElementById('lightbox-img').alt = frame.title;
+        document.getElementById('lightbox-step-label').innerText = frame.title;
+        document.getElementById('lightbox-step-text').innerText = frame.text;
+        document.getElementById('lightbox-counter').innerText =
+            String(lightboxIndex + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    function openLightbox(index){
+        lightboxIndex = index;
+        renderLightboxFrame();
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function lightboxNav(dir){
+        const total = ghlFrames.length;
+        lightboxIndex = (lightboxIndex + dir + total) % total;
+        renderLightboxFrame();
+    }
+
+    document.addEventListener('keydown', (e) => {
+        const lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') lightboxNav(1);
+        if (e.key === 'ArrowLeft') lightboxNav(-1);
+    });
+
+    function buildTicker() {
+        const items = [
+            { label: '7,222 CONVERSIONES', sub: 'Vilo Fence · PMax', color: 'var(--green)' },
+            { label: 'CPA $3.06', sub: 'Mejor campaña (Gate)', color: 'var(--blue)' },
+            { label: 'ROAS 2.41X', sub: 'Luis Feliz Caballero · feb–may 2026', color: 'var(--green)' },
+            { label: '$90K → $200K/MES', sub: 'SOS Support (Vigilant IT) · 2021–2024', color: 'var(--blue)' },
+            { label: '11,310 CONVERSIONES TOTALES', sub: '4 líneas de campaña activas', color: 'var(--green)' },
+            { label: 'STACK', sub: 'Google Ads · Meta Ads · GHL · Hyros · GTM', color: 'var(--blue)' },
+            { label: '8 AÑOS', sub: 'Liderando equipos de growth', color: 'var(--green)' },
+            { label: 'ATRIBUCIÓN', sub: 'De cada dólar de presupuesto a cada dólar de revenue', color: 'var(--blue)' },
+        ];
+        const track = document.getElementById('ticker-track');
+        const renderSet = () => items.map(it => `
+            <div class="ticker-item">
+                <span style="width:6px;height:6px;border-radius:50%;background:${it.color};display:inline-block;"></span>
+                <span style="color:${it.color}; font-weight:600;">${it.label}</span>
+                <span style="color:var(--text-1)">— ${it.sub}</span>
+            </div>
+        `).join('');
+        track.innerHTML = renderSet() + renderSet();
+    }
+
+    function renderCaso2Chart() {
+        const meses = ['Febrero', 'Marzo', 'Abril', 'Mayo'];
+        const revenue = [80046, 39414.50, 56338.50, 49417.50];
+        const marketing = [37805.10, 19487.26, 18948.45, 17275.19];
+
+        const trace1 = {
+            x: meses, y: revenue, name: 'Revenue atribuido', type: 'bar',
+            marker: { color: '#12d199', opacity: 0.9 },
         };
+        const trace2 = {
+            x: meses, y: marketing, name: 'Inversión en marketing', type: 'bar',
+            marker: { color: '#22aaff', opacity: 0.85 },
+        };
+        const layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#93a3b8', family: 'IBM Plex Mono', size: 11 },
+            margin: { l: 55, r: 20, t: 10, b: 40 },
+            barmode: 'group',
+            legend: { orientation: 'h', y: -0.25 },
+            xaxis: { gridcolor: 'rgba(255,255,255,0.05)' },
+            yaxis: { title: 'USD', gridcolor: 'rgba(255,255,255,0.05)', tickprefix: '$' }
+        };
+        Plotly.newPlot('chart-caso2', [trace1, trace2], layout, { responsive: true, displayModeBar: false });
+    }
 
-        function calculateROI() {
-            const spend = parseFloat(document.getElementById('calc-spend').value);
-            const channelNodes = document.getElementsByName('calc-channel');
-            let channel = 'google';
-            for (let i = 0; i < channelNodes.length; i++) {
-                if (channelNodes[i].checked) {
-                    channel = channelNodes[i].value;
-                    break;
-                }
-            }
-            
-            document.getElementById('calc-spend-display').innerText = fmtMoney(spend);
-
-            let currentCpl = 5.0; 
-            if(channel === 'meta') currentCpl = 7.0;
-            if(channel === 'omni') currentCpl = 6.0;
-
-            const closeRate = 0.05; 
-            const averageTicket = 1500; 
-
-            const leads = spend / currentCpl;
-            const sales = leads * closeRate;
-            const revenue = sales * averageTicket;
-
-            document.getElementById('calc-leads').innerText = fmtInt(leads);
-            document.getElementById('calc-cpl-display').innerText = fmtMoneyDec(currentCpl);
-            document.getElementById('calc-sales').innerText = fmtInt(sales);
-            document.getElementById('calc-revenue').innerText = fmtMoney(revenue);
+    function calculateROI() {
+        const spend = parseFloat(document.getElementById('calc-spend').value);
+        const channelNodes = document.getElementsByName('calc-channel');
+        let channel = 'google';
+        for (let i = 0; i < channelNodes.length; i++) {
+            if (channelNodes[i].checked) { channel = channelNodes[i].value; break; }
         }
 
-        function renderAdsChart() {
-            const campañas = ['Perf. Max (Fence Outlet)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Instalaciones)'];
-            const conversiones = [7222, 2045, 649, 1394]; 
-            const cpAs = [5.49, 3.39, 3.06, 4.85]; 
+        document.getElementById('calc-spend-display').innerText = fmtMoney(spend);
 
-            const trace1 = {
-                x: campañas,
-                y: conversiones,
-                name: 'Volumen de Conversiones',
-                type: 'bar',
-                marker: { color: '#06b6d4', opacity: 0.9 }, 
-            };
+        let currentCpl = 5.0;
+        if (channel === 'meta') currentCpl = 7.0;
+        if (channel === 'omni') currentCpl = 6.0;
 
-            const trace2 = {
-                x: campañas,
-                y: cpAs,
-                name: 'CPA ($ USD)',
-                type: 'scatter',
-                mode: 'lines+markers+text',
-                text: cpAs.map(val => '$' + val),
-                textposition: 'top center',
-                yaxis: 'y2',
-                line: { color: '#10b981', width: 3 }, 
-                marker: { size: 8, color: '#10b981' },
-                textfont: { color: '#10b981', size: 12, weight: 'bold' }
-            };
+        const closeRate = 0.05;
+        const averageTicket = 1500;
 
-            const layout = {
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                font: { color: '#94a3b8' },
-                margin: { l: 50, r: 50, t: 30, b: 60 },
-                legend: { orientation: 'h', y: -0.2 },
-                xaxis: { gridcolor: 'rgba(255,255,255,0.05)' },
-                yaxis: { title: 'Conversiones Totales', gridcolor: 'rgba(255,255,255,0.05)' },
-                yaxis2: { 
-                    title: 'Costo por Adquisición (CPA)', 
-                    overlaying: 'y', 
-                    side: 'right', 
-                    showgrid: false,
-                    range: [0, 10]
-                }
-            };
+        const leads = spend / currentCpl;
+        const sales = leads * closeRate;
+        const revenue = sales * averageTicket;
 
-            Plotly.newPlot('chart-performance', [trace1, trace2], layout, {responsive: true, displayModeBar: false});
-        }
-    </script>
+        document.getElementById('calc-leads').innerText = fmtInt(leads);
+        document.getElementById('calc-cpl-display').innerText = fmtMoneyDec(currentCpl);
+        document.getElementById('calc-sales').innerText = fmtInt(sales);
+        document.getElementById('calc-revenue').innerText = fmtMoney(revenue);
+    }
+
+    function renderAdsChart() {
+        const campañas = ['Perf. Max (Vilo Fence)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Instalaciones)'];
+        const conversiones = [7222, 2045, 649, 1394];
+        const cpAs = [5.49, 3.39, 3.06, 4.85];
+
+        const trace1 = {
+            x: campañas, y: conversiones, name: 'Volumen de conversiones', type: 'bar',
+            marker: { color: '#22aaff', opacity: 0.9 },
+        };
+        const trace2 = {
+            x: campañas, y: cpAs, name: 'CPA ($ USD)', type: 'scatter', mode: 'lines+markers+text',
+            text: cpAs.map(val => '$' + val), textposition: 'top center', yaxis: 'y2',
+            line: { color: '#12d199', width: 3 }, marker: { size: 8, color: '#12d199' },
+            textfont: { color: '#12d199', size: 12 }
+        };
+        const layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#93a3b8', family: 'IBM Plex Mono' },
+            margin: { l: 50, r: 50, t: 30, b: 60 },
+            legend: { orientation: 'h', y: -0.2 },
+            xaxis: { gridcolor: 'rgba(255,255,255,0.05)' },
+            yaxis: { title: 'Conversiones totales', gridcolor: 'rgba(255,255,255,0.05)' },
+            yaxis2: { title: 'CPA ($)', overlaying: 'y', side: 'right', showgrid: false, range: [0, 10] }
+        };
+        Plotly.newPlot('chart-performance', [trace1, trace2], layout, { responsive: true, displayModeBar: false });
+    }
+</script>
 </body>
 </html>
