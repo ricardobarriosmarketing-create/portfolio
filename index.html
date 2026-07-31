@@ -119,6 +119,15 @@
         .nav-link{ color:var(--text-1); transition:color .2s ease; }
         .nav-link:hover{ color:var(--text-0); }
 
+        /* Lang toggle */
+        .lang-toggle{ display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+        .lang-btn{
+            padding:.45rem .75rem; font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.08em;
+            color:var(--text-1); background:transparent; cursor:pointer; border:none; transition:background .2s ease, color .2s ease;
+        }
+        .lang-btn.active{ background:var(--green); color:#04120d; font-weight:700; }
+        .lang-btn:not(.active):hover{ color:var(--text-0); }
+
         /* Showreel — caso interactivo tipo "play" */
         .showreel-case .play-overlay{
             position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -134,6 +143,10 @@
             transform:scale(.9); transition:transform .25s ease;
         }
         .showreel-case:hover .play-btn{ transform:scale(1); }
+        .cert-pending-badge{
+            font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-1);
+            border:1px solid var(--line); border-radius:999px; padding:.25rem .65rem;
+        }
         .case-badge{
             position:absolute; top:.85rem; left:.85rem; z-index:2;
             font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase;
@@ -183,15 +196,21 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <a href="#top" class="font-display font-bold text-lg">RB<span style="color:var(--green)">.</span></a>
         <nav class="hidden md:flex items-center gap-7 text-sm">
-            <a href="#bottleneck" class="nav-link">El problema</a>
-            <a href="#stack" class="nav-link">Stack</a>
-            <a href="#casos" class="nav-link">Casos de estudio</a>
-            <a href="#portafolio" class="nav-link">Portafolio</a>
-            <a href="#dashboard" class="nav-link">Performance</a>
+            <a href="#bottleneck" class="nav-link" data-i18n="nav-problema">El problema</a>
+            <a href="#stack" class="nav-link" data-i18n="nav-stack">Stack</a>
+            <a href="#casos" class="nav-link" data-i18n="nav-casos">Casos de estudio</a>
+            <a href="#portafolio" class="nav-link" data-i18n="nav-portafolio">Portafolio</a>
+            <a href="#dashboard" class="nav-link" data-i18n="nav-performance">Performance</a>
         </nav>
-        <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-primary text-xs md:text-sm rounded-lg px-4 py-2 inline-flex items-center gap-2">
-            <i data-lucide="download" class="h-4 w-4"></i> CV
-        </a>
+        <div class="flex items-center gap-3">
+            <div class="lang-toggle" role="group" aria-label="Language selector">
+                <button id="lang-es-btn" class="lang-btn" onclick="toggleLang('es')">ES</button>
+                <button id="lang-en-btn" class="lang-btn" onclick="toggleLang('en')">EN</button>
+            </div>
+            <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-primary text-xs md:text-sm rounded-lg px-4 py-2 inline-flex items-center gap-2">
+                <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="nav-cv">CV</span>
+            </a>
+        </div>
     </div>
 </header>
 
@@ -200,22 +219,22 @@
     <!-- HERO -->
     <section class="pt-16 md:pt-24 pb-12">
         <div class="max-w-3xl">
-            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> GROWTH &amp; PERFORMANCE MARKETING — NIVEL LEAD</span>
-            <h1 class="mt-6 text-4xl md:text-6xl font-bold leading-[1.05]">
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> <span data-i18n="hero-eyebrow">GROWTH &amp; PERFORMANCE MARKETING — NIVEL LEAD</span></span>
+            <h1 class="mt-6 text-4xl md:text-6xl font-bold leading-[1.05]" data-i18n="hero-title">
                 No optimizo campañas.<br>
                 Diseño la máquina que las <span style="color:var(--green)">hace rentables</span>.
             </h1>
-            <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
+            <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl" data-i18n="hero-p">
                 8 años dirigiendo equipos de growth, presupuestos de pauta y sistemas de atribución.
                 Mi trabajo no es "correr anuncios": es construir el sistema completo —pauta, funnel, CRM y reporting—
                 para que sepas exactamente de dónde viene cada dólar de ingreso que entra.
             </p>
             <div class="mt-8 flex flex-wrap gap-4">
                 <a href="mailto:ricardobarriosmarketing@gmail.com?subject=Agendemos%2020%20minutos" class="btn-primary rounded-lg px-6 py-3 text-sm inline-flex items-center gap-2">
-                    <i data-lucide="calendar" class="h-5 w-5"></i> Agenda una llamada de 20 min
+                    <i data-lucide="calendar" class="h-5 w-5"></i> <span data-i18n="hero-btn1">Agenda una llamada de 20 min</span>
                 </a>
                 <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
-                    <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV en PDF
+                    <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="hero-btn2">Descargar CV en PDF</span>
                 </a>
             </div>
         </div>
@@ -231,25 +250,25 @@
     <!-- BOTTLENECK -->
     <section id="bottleneck" class="mb-24">
         <div class="max-w-2xl mb-10">
-            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> DIAGNÓSTICO</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">El problema casi nunca es la pauta.</h2>
-            <p class="mt-3 text-white/60">Es no saber, con precisión de dólar, qué parte del sistema está fallando. Esto es lo que veo repetido en cada auditoría:</p>
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> <span data-i18n="bottleneck-eyebrow">DIAGNÓSTICO</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="bottleneck-h2">El problema casi nunca es la pauta.</h2>
+            <p class="mt-3 text-white/60" data-i18n="bottleneck-p">Es no saber, con precisión de dólar, qué parte del sistema está fallando. Esto es lo que veo repetido en cada auditoría:</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div class="card bottleneck-card p-6">
                 <i data-lucide="split" class="h-6 w-6 mb-4" style="color:var(--blue)"></i>
-                <h3 class="font-display font-semibold text-lg">Presupuesto sin atribución real</h3>
-                <p class="mt-2 text-sm text-white/60">Se sabe cuánto se gastó. Nadie sabe qué canal, anuncio o landing generó la venta. Sin Hyros o GTM bien implementado, cada decisión de presupuesto es una apuesta.</p>
+                <h3 class="font-display font-semibold text-lg" data-i18n="bn1-h3">Presupuesto sin atribución real</h3>
+                <p class="mt-2 text-sm text-white/60" data-i18n="bn1-p">Se sabe cuánto se gastó. Nadie sabe qué canal, anuncio o landing generó la venta. Sin Hyros o GTM bien implementado, cada decisión de presupuesto es una apuesta.</p>
             </div>
             <div class="card bottleneck-card p-6">
                 <i data-lucide="users" class="h-6 w-6 mb-4" style="color:var(--blue)"></i>
-                <h3 class="font-display font-semibold text-lg">Equipos operando sin SOPs</h3>
-                <p class="mt-2 text-sm text-white/60">El equipo creativo y de pauta trabaja por intuición, no por proceso. Sin KPIs claros en ClickUp o Monday, escalar solo multiplica el caos.</p>
+                <h3 class="font-display font-semibold text-lg" data-i18n="bn2-h3">Equipos operando sin SOPs</h3>
+                <p class="mt-2 text-sm text-white/60" data-i18n="bn2-p">El equipo creativo y de pauta trabaja por intuición, no por proceso. Sin KPIs claros en ClickUp o Monday, escalar solo multiplica el caos.</p>
             </div>
             <div class="card bottleneck-card g p-6">
                 <i data-lucide="filter" class="h-6 w-6 mb-4" style="color:var(--green)"></i>
-                <h3 class="font-display font-semibold text-lg">Landing pages que no cierran</h3>
-                <p class="mt-2 text-sm text-white/60">El tráfico llega, pero el funnel no está diseñado para convertir. Sin un framework de conversión (AIDA) y automatización en GHL, el lead se enfría.</p>
+                <h3 class="font-display font-semibold text-lg" data-i18n="bn3-h3">Landing pages que no cierran</h3>
+                <p class="mt-2 text-sm text-white/60" data-i18n="bn3-p">El tráfico llega, pero el funnel no está diseñado para convertir. Sin un framework de conversión (AIDA) y automatización en GHL, el lead se enfría.</p>
             </div>
         </div>
     </section>
@@ -257,48 +276,48 @@
     <!-- STACK -->
     <section id="stack" class="mb-24">
         <div class="max-w-2xl mb-10">
-            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> INFRAESTRUCTURA</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">El sistema que opero, no solo las herramientas.</h2>
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> <span data-i18n="stack-eyebrow">INFRAESTRUCTURA</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="stack-h2">El sistema que opero, no solo las herramientas.</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <div class="card p-6">
-                <p class="mono text-xs" style="color:var(--blue)">01 · PAUTA &amp; ATRIBUCIÓN</p>
-                <h3 class="mt-3 font-display font-semibold">Adquisición medible</h3>
+                <p class="mono text-xs" style="color:var(--blue)" data-i18n="stack1-label">01 · PAUTA &amp; ATRIBUCIÓN</p>
+                <h3 class="mt-3 font-display font-semibold" data-i18n="stack1-h3">Adquisición medible</h3>
                 <ul class="mt-3 space-y-2 text-sm text-white/60">
                     <li>Google Ads (PMax, Search)</li>
                     <li>Meta Ads Manager</li>
                     <li>Google Tag Manager</li>
-                    <li>Hyros (atribución multitoque)</li>
+                    <li data-i18n="stack1-li4">Hyros (atribución multitoque)</li>
                 </ul>
             </div>
             <div class="card p-6">
-                <p class="mono text-xs" style="color:var(--green)">02 · AUTOMATIZACIÓN &amp; CRM</p>
-                <h3 class="mt-3 font-display font-semibold">Funnels que trabajan solos</h3>
+                <p class="mono text-xs" style="color:var(--green)" data-i18n="stack2-label">02 · AUTOMATIZACIÓN &amp; CRM</p>
+                <h3 class="mt-3 font-display font-semibold" data-i18n="stack2-h3">Funnels que trabajan solos</h3>
                 <ul class="mt-3 space-y-2 text-sm text-white/60">
                     <li>GoHighLevel (GHL)</li>
                     <li>Zoho CRM</li>
-                    <li>Secuencias &amp; nurturing</li>
-                    <li>Formularios AIDA (Ninja Forms)</li>
+                    <li data-i18n="stack2-li3">Secuencias &amp; nurturing</li>
+                    <li data-i18n="stack2-li4">Formularios AIDA (Ninja Forms)</li>
                 </ul>
             </div>
             <div class="card p-6">
-                <p class="mono text-xs" style="color:var(--blue)">03 · OPERACIONES</p>
-                <h3 class="mt-3 font-display font-semibold">Equipos que no dependen de mí</h3>
+                <p class="mono text-xs" style="color:var(--blue)" data-i18n="stack3-label">03 · OPERACIONES</p>
+                <h3 class="mt-3 font-display font-semibold" data-i18n="stack3-h3">Equipos que no dependen de mí</h3>
                 <ul class="mt-3 space-y-2 text-sm text-white/60">
                     <li>ClickUp</li>
                     <li>Monday.com</li>
-                    <li>SOPs documentados</li>
-                    <li>KPIs por rol y por canal</li>
+                    <li data-i18n="stack3-li3">SOPs documentados</li>
+                    <li data-i18n="stack3-li4">KPIs por rol y por canal</li>
                 </ul>
             </div>
             <div class="card p-6">
-                <p class="mono text-xs" style="color:var(--green)">04 · SEO &amp; ANALÍTICA</p>
-                <h3 class="mt-3 font-display font-semibold">Visibilidad orgánica</h3>
+                <p class="mono text-xs" style="color:var(--green)" data-i18n="stack4-label">04 · SEO &amp; ANALÍTICA</p>
+                <h3 class="mt-3 font-display font-semibold" data-i18n="stack4-h3">Visibilidad orgánica</h3>
                 <ul class="mt-3 space-y-2 text-sm text-white/60">
-                    <li>SEO técnico</li>
+                    <li data-i18n="stack4-li1">SEO técnico</li>
                     <li>Web analytics</li>
-                    <li>Reporting ejecutivo</li>
-                    <li>Testing continuo de creativos</li>
+                    <li data-i18n="stack4-li3">Reporting ejecutivo</li>
+                    <li data-i18n="stack4-li4">Testing continuo de creativos</li>
                 </ul>
             </div>
         </div>
@@ -307,9 +326,9 @@
     <!-- CASOS DE ESTUDIO -->
     <section id="casos" class="mb-24">
         <div class="max-w-2xl mb-10">
-            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> EVIDENCIA, NO PROMESAS</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Casos de estudio</h2>
-            <p class="mt-3 text-white/60">Cada caso sigue el mismo framework: el contexto en el que entré, la arquitectura que construí, y el resultado financiero que dejó atrás.</p>
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> <span data-i18n="casos-eyebrow">EVIDENCIA, NO PROMESAS</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="casos-h2">Casos de estudio</h2>
+            <p class="mt-3 text-white/60" data-i18n="casos-p">Cada caso sigue el mismo framework: el contexto en el que entré, la arquitectura que construí, y el resultado financiero que dejó atrás.</p>
         </div>
 
         <div class="space-y-6">
@@ -322,34 +341,43 @@
                             <h3 class="font-display font-semibold text-xl">
                                 <a href="https://www.vilofence.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:inherit">Vilo Fence</a> — Performance Max
                             </h3>
-                            <p class="text-xs text-white/50 mt-1">Vertical: Fencing / Gates — Home Services local (Tampa, FL)</p>
+                            <p class="text-xs text-white/50 mt-1" data-i18n="caso1-sub">Vertical: Fencing / Gates — Home Services local (Tampa, FL)</p>
                         </div>
                     </div>
                     <div class="text-right">
                         <p class="text-2xl font-bold" style="color:var(--green)">7,222</p>
-                        <p class="text-[10px] text-white/50 uppercase tracking-wider">conversiones @ $5.49 CPA</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider" data-i18n="caso1-metric">conversiones @ $5.49 CPA</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
-                        <p class="mt-2 text-sm text-white/70">La cuenta dependía de campañas de Search con techo de escala y sin estructura de feed para e-commerce local.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-contexto">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso1-contexto">La cuenta dependía de campañas de Search con techo de escala y sin estructura de feed para e-commerce local.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
-                        <p class="mt-2 text-sm text-white/70">Rediseño completo de la campaña como Performance Max, segmentación por grupos de activos y testing de creativos de alto CTR.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-arquitectura">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso1-arquitectura">Rediseño completo de la campaña como Performance Max, segmentación por grupos de activos y testing de creativos de alto CTR.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--green)">Resultado</p>
-                        <p class="mt-2 text-sm text-white/70">7,222 conversiones a un CPA de $5.49 — el volumen más alto entre las 4 líneas de campaña activas de la cuenta.</p>
+                        <p class="flow-step" style="color:var(--green)" data-i18n="lbl-resultado">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso1-resultado">7,222 conversiones a un CPA de $5.49 — el volumen más alto entre las 4 líneas de campaña activas de la cuenta.</p>
                     </div>
                 </div>
-                <div class="mt-6 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4" style="border-top:1px solid var(--line)">
-                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
-                        <img src="assets/Vilo_Fence_Custom_Gates.png" alt="Vilo Fence - Custom Gates in Tampa" class="portfolio-img">
+                <div class="mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <p class="flow-step mb-3" style="color:var(--green)" data-i18n="caso1-ev1">Evidencia · Resultados en Google Ads</p>
+                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                        <img src="assets/Google_Ads_results.png" alt="Google Ads - Resultados de campañas Vilo Fence (Performance Max)" class="w-full h-auto rounded-lg">
                     </div>
-                    <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
-                        <img src="assets/Vilo_Fence_Materials.png" alt="Vilo Fence - Premium Fence Materials in Tampa" class="portfolio-img">
+                </div>
+                <div class="mt-6 pt-6" style="border-top:1px solid var(--line)">
+                    <p class="flow-step mb-3" style="color:var(--blue)" data-i18n="caso1-ev2">Evidencia · Landing pages diseñadas</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
+                            <img src="assets/Vilo_Fence_Custom_Gates.png" alt="Vilo Fence - Custom Gates in Tampa" class="portfolio-img">
+                        </div>
+                        <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video">
+                            <img src="assets/Vilo_Fence_Materials.png" alt="Vilo Fence - Premium Fence Materials in Tampa" class="portfolio-img">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -361,26 +389,26 @@
                         <span class="case-num">02</span>
                         <div>
                             <h3 class="font-display font-semibold text-xl">Luis Feliz Caballero — "El Trading No Es Difícil"</h3>
-                            <p class="text-xs text-white/50 mt-1">Vertical: Educación financiera / comunidad de trading (Forex, cripto, futuros) — Puerto Rico &amp; LATAM</p>
+                            <p class="text-xs text-white/50 mt-1" data-i18n="caso2-sub">Vertical: Educación financiera / comunidad de trading (Forex, cripto, futuros) — Puerto Rico &amp; LATAM</p>
                         </div>
                     </div>
                     <div class="text-right">
                         <p class="text-2xl font-bold" style="color:var(--green)">$225,216.50</p>
-                        <p class="text-[10px] text-white/50 uppercase tracking-wider">revenue atribuido (feb–may 2026)</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider" data-i18n="caso2-metric">revenue atribuido (feb–may 2026)</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
-                        <p class="mt-2 text-sm text-white/70">Comunidad de trading en expansión activa en Puerto Rico y Latinoamérica, con necesidad de escalar la adquisición de estudiantes sin perder rentabilidad por cada dólar invertido en pauta.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-contexto">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso2-contexto">Comunidad de trading en expansión activa en Puerto Rico y Latinoamérica, con necesidad de escalar la adquisición de estudiantes sin perder rentabilidad por cada dólar invertido en pauta.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
-                        <p class="mt-2 text-sm text-white/70">Gestión directa del presupuesto de marketing digital mes a mes, con atribución de revenue por periodo para tomar decisiones de escalado o corte con datos, no con intuición.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-arquitectura">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso2-arquitectura">Gestión directa del presupuesto de marketing digital mes a mes, con atribución de revenue por periodo para tomar decisiones de escalado o corte con datos, no con intuición.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--green)">Resultado</p>
-                        <p class="mt-2 text-sm text-white/70">$225,216.50 en revenue atribuido contra $93,516.00 invertidos en 4 meses (feb–may 2026) — un ROAS de 2.41x sostenido mes a mes.</p>
+                        <p class="flow-step" style="color:var(--green)" data-i18n="lbl-resultado">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso2-resultado">$225,216.50 en revenue atribuido contra $93,516.00 invertidos en 4 meses (feb–may 2026) — un ROAS de 2.41x sostenido mes a mes.</p>
                     </div>
                 </div>
                 <div class="mt-6 pt-6" style="border-top:1px solid var(--line)">
@@ -393,27 +421,27 @@
                     <div class="flex items-start gap-5">
                         <span class="case-num">03</span>
                         <div>
-                            <h3 class="font-display font-semibold text-xl">SOS Support <span class="text-white/40 font-normal">(hoy <a href="https://vigilanttechs.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:var(--blue)">Vigilant IT</a>)</span></h3>
-                            <p class="text-xs text-white/50 mt-1">Vertical: Soporte IT gestionado (Managed IT Services) — Estados Unidos</p>
+                            <h3 class="font-display font-semibold text-xl">SOS Support <span class="text-white/40 font-normal" data-i18n="caso3-hoy">(hoy <a href="https://vigilanttechs.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:var(--blue)">Vigilant IT</a>)</span></h3>
+                            <p class="text-xs text-white/50 mt-1" data-i18n="caso3-sub">Vertical: Soporte IT gestionado (Managed IT Services) — Estados Unidos</p>
                         </div>
                     </div>
                     <div class="text-right">
                         <p class="text-2xl font-bold" style="color:var(--green)">$90K → $200K</p>
-                        <p class="text-[10px] text-white/50 uppercase tracking-wider">revenue mensual (sep 2021 → prom. 2022–2024)</p>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider" data-i18n="caso3-metric">revenue mensual (sep 2021 → prom. 2022–2024)</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6" style="border-top:1px solid var(--line)">
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Contexto</p>
-                        <p class="mt-2 text-sm text-white/70">Empresa de soporte IT en Estados Unidos, operando bajo estrictas políticas de privacidad financiera: sin acceso directo a la parte contable ni al volumen de llamadas entrantes a oficina.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-contexto">Contexto</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso3-contexto">Empresa de soporte IT en Estados Unidos, operando bajo estrictas políticas de privacidad financiera: sin acceso directo a la parte contable ni al volumen de llamadas entrantes a oficina.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--blue)">Arquitectura</p>
-                        <p class="mt-2 text-sm text-white/70">Gestión sostenida de la estrategia de adquisición durante más de dos años, sin visibilidad total del funnel por las restricciones internas de la compañía — trabajando con los indicadores disponibles para sostener el crecimiento mes a mes.</p>
+                        <p class="flow-step" style="color:var(--blue)" data-i18n="lbl-arquitectura">Arquitectura</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso3-arquitectura">Gestión sostenida de la estrategia de adquisición durante más de dos años, sin visibilidad total del funnel por las restricciones internas de la compañía — trabajando con los indicadores disponibles para sostener el crecimiento mes a mes.</p>
                     </div>
                     <div>
-                        <p class="flow-step" style="color:var(--green)">Resultado</p>
-                        <p class="mt-2 text-sm text-white/70">Revenue mensual de la compañía escaló de $90,000 en septiembre de 2021 a un promedio de $200,000/mes sostenido entre 2022 y 2024, durante el periodo de mi gestión.</p>
+                        <p class="flow-step" style="color:var(--green)" data-i18n="lbl-resultado">Resultado</p>
+                        <p class="mt-2 text-sm text-white/70" data-i18n="caso3-resultado">Revenue mensual de la compañía escaló de $90,000 en septiembre de 2021 a un promedio de $200,000/mes sostenido entre 2022 y 2024, durante el periodo de mi gestión.</p>
                     </div>
                 </div>
             </div>
@@ -423,46 +451,145 @@
     <!-- CV Y CERTIFICACIONES -->
     <section class="mb-24">
         <div class="max-w-2xl mb-8">
-            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> RESPALDO</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Curriculum y certificaciones</h2>
-            <p class="mt-3 text-white/60">Trayectoria y avales académicos: Google, Zoho, TheBigSEO.</p>
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> <span data-i18n="cv-eyebrow">RESPALDO</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="cv-h2">Curriculum y certificaciones</h2>
+            <p class="mt-3 text-white/60" data-i18n="cv-p">Trayectoria, avales académicos y respaldo directo de clientes y empleadores anteriores.</p>
         </div>
         <div class="card flex justify-center bg-white/5 p-4 md:p-8">
             <img src="assets/hf_20260722_221445_44f5ac06-3472-4fa4-8d2d-de9e825d61af_min.png" alt="Curriculum Vitae Ricardo Barrios" class="rounded-xl shadow-2xl max-w-full h-auto border border-white/10">
+        </div>
+
+        <!-- Certificaciones -->
+        <div class="mt-12">
+            <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)" data-i18n="cert-h3">Certificaciones</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                    <img src="assets/Cert_Google_Activate.jpg" alt="Google Actívate - Fundamentos de Marketing Digital" class="w-full h-auto rounded-lg portfolio-img-contain">
+                    <p class="text-center text-xs text-white/60 mt-2 mb-1" data-i18n="cert1-cap">Google Actívate — Fundamentos de Marketing Digital (40h)</p>
+                </div>
+                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                    <img src="assets/Cert_BrightLocal.png" alt="BrightLocal Academy - How to Create Website Content for Local SEO" class="w-full h-auto rounded-lg portfolio-img-contain">
+                    <p class="text-center text-xs text-white/60 mt-2 mb-1">BrightLocal Academy — Website Content for Local SEO</p>
+                </div>
+                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                    <img src="assets/Cert_IT_Academy_Backend.jpg" alt="IT Academy - Backend Development 101" class="w-full h-auto rounded-lg portfolio-img-contain">
+                    <p class="text-center text-xs text-white/60 mt-2 mb-1">IT Academy (Appoint Pros) — Backend Development 101</p>
+                </div>
+                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                    <img src="assets/Cert_TechTribe_MarketResearch.jpg" alt="The Tech Tribe - Market Research Blueprint" class="w-full h-auto rounded-lg portfolio-img-contain">
+                    <p class="text-center text-xs text-white/60 mt-2 mb-1">The Tech Tribe / AdSkills — Market Research Blueprint</p>
+                </div>
+                <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white p-2">
+                    <img src="assets/Cert_TechTribe_LinkedIn.jpg" alt="The Tech Tribe - The LinkedIn Advantage" class="w-full h-auto rounded-lg portfolio-img-contain">
+                    <p class="text-center text-xs text-white/60 mt-2 mb-1">The Tech Tribe — The LinkedIn Advantage</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificaciones en curso — placeholders. Reemplazar cada bloque cuando termines el curso:
+             1) Quita la clase "cert-pending" del div .portfolio-item
+             2) Borra el <div class="cert-pending-icon">...</div>
+             3) Agrega arriba: <img src="assets/NOMBRE_DEL_ARCHIVO.png" class="w-full h-auto rounded-lg portfolio-img-contain"> -->
+        <div class="mt-12">
+            <h3 class="text-xl font-display font-semibold mb-1" style="color:var(--green)" data-i18n="certp-h3">Certificaciones en curso</h3>
+            <p class="text-sm text-white/50 mb-6" data-i18n="certp-p">Cursos en proceso — esta sección se actualiza con el certificado correspondiente al finalizar cada uno.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="portfolio-item cert-pending rounded-xl overflow-hidden border border-white/10 bg-white/5 p-4 flex flex-col items-center justify-center text-center" style="border-style:dashed; min-height:180px;">
+                    <span class="cert-pending-badge mono" data-i18n="certp-badge">En curso</span>
+                    <div class="cert-pending-icon my-3"><i data-lucide="graduation-cap" class="h-7 w-7" style="color:var(--text-1)"></i></div>
+                    <p class="text-xs text-white/70" data-i18n="certp1">Google Ads — con Alan Valdéz</p>
+                </div>
+                <div class="portfolio-item cert-pending rounded-xl overflow-hidden border border-white/10 bg-white/5 p-4 flex flex-col items-center justify-center text-center" style="border-style:dashed; min-height:180px;">
+                    <span class="cert-pending-badge mono" data-i18n="certp-badge">En curso</span>
+                    <div class="cert-pending-icon my-3"><i data-lucide="graduation-cap" class="h-7 w-7" style="color:var(--text-1)"></i></div>
+                    <p class="text-xs text-white/70" data-i18n="certp2">GoHighLevel Masterclass: From Beginner to Expert</p>
+                </div>
+                <div class="portfolio-item cert-pending rounded-xl overflow-hidden border border-white/10 bg-white/5 p-4 flex flex-col items-center justify-center text-center" style="border-style:dashed; min-height:180px;">
+                    <span class="cert-pending-badge mono" data-i18n="certp-badge">En curso</span>
+                    <div class="cert-pending-icon my-3"><i data-lucide="graduation-cap" class="h-7 w-7" style="color:var(--text-1)"></i></div>
+                    <p class="text-xs text-white/70" data-i18n="certp3">Zoho CRM User Training Course — Beginner to Expert</p>
+                </div>
+                <div class="portfolio-item cert-pending rounded-xl overflow-hidden border border-white/10 bg-white/5 p-4 flex flex-col items-center justify-center text-center" style="border-style:dashed; min-height:180px;">
+                    <span class="cert-pending-badge mono" data-i18n="certp-badge">En curso</span>
+                    <div class="cert-pending-icon my-3"><i data-lucide="graduation-cap" class="h-7 w-7" style="color:var(--text-1)"></i></div>
+                    <p class="text-xs text-white/70" data-i18n="certp4">GHL Service Pro Roadmap</p>
+                </div>
+                <div class="portfolio-item cert-pending rounded-xl overflow-hidden border border-white/10 bg-white/5 p-4 flex flex-col items-center justify-center text-center" style="border-style:dashed; min-height:180px;">
+                    <span class="cert-pending-badge mono" data-i18n="certp-badge">En curso</span>
+                    <div class="cert-pending-icon my-3"><i data-lucide="graduation-cap" class="h-7 w-7" style="color:var(--text-1)"></i></div>
+                    <p class="text-xs text-white/70" data-i18n="certp5">Conversion Tracking for Digital Marketing</p>
+                </div>
+                <!-- Espacio libre: copia uno de los bloques de arriba si sumas un 6to curso -->
+            </div>
+        </div>
+
+        <!-- Cartas de recomendación -->
+        <div class="mt-12">
+            <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--green)" data-i18n="letters-h3">Cartas de recomendación</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="card p-6 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
+                            <i data-lucide="file-text" class="h-5 w-5" style="color:var(--green)"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm">Vilo Fence LLC</p>
+                            <p class="text-xs text-white/50" data-i18n="letter1-role">Dariel Concepción — President</p>
+                        </div>
+                    </div>
+                    <a href="assets/Carta_Recomendacion_VilloFence.pdf" target="_blank" class="btn-secondary rounded-lg px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 shrink-0">
+                        <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="btn-verpdf">Ver PDF</span>
+                    </a>
+                </div>
+                <div class="card p-6 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
+                            <i data-lucide="file-text" class="h-5 w-5" style="color:var(--green)"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm">SOS | Support</p>
+                            <p class="text-xs text-white/50">Jason Kidman</p>
+                        </div>
+                    </div>
+                    <a href="assets/Carta_Recomendacion_SOSSupport.pdf" target="_blank" class="btn-secondary rounded-lg px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 shrink-0">
+                        <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="btn-verpdf">Ver PDF</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- SHOWREEL -->
     <section class="mb-24">
         <div class="max-w-2xl mb-8">
-            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> EN VIVO</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Showreel &amp; casos explicados</h2>
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> <span data-i18n="showreel-eyebrow">EN VIVO</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="showreel-h2">Showreel &amp; casos explicados</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="card !p-3">
                 <div class="aspect-video w-full">
                     <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/PvO3HO6_FIA" title="Resumen de Gestión" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p class="mt-3 text-center text-sm font-semibold">Resumen de gestión y liderazgo</p>
+                <p class="mt-3 text-center text-sm font-semibold" data-i18n="video1-cap">Resumen de gestión y liderazgo</p>
             </div>
             <div class="card !p-3">
                 <div class="aspect-[9/16] md:aspect-video w-full max-h-[400px] mx-auto">
                     <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/mE6ITBb9-ZE" title="Análisis Técnico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p class="mt-3 text-center text-sm font-semibold">Análisis técnico y setup de automatizaciones</p>
+                <p class="mt-3 text-center text-sm font-semibold" data-i18n="video2-cap">Análisis técnico y setup de automatizaciones</p>
             </div>
 
-            <div class="card !p-3 md:col-span-2 showreel-case relative cursor-pointer" onclick="openLightbox(0)" role="button" aria-label="Ver recorrido paso a paso del workflow de GHL">
+            <div class="card !p-3 md:col-span-2 showreel-case relative cursor-pointer" onclick="openLightbox(0)" role="button" data-i18n-aria="showreel-aria" aria-label="Ver recorrido paso a paso del workflow de GHL">
                 <div class="aspect-video w-full relative rounded-lg overflow-hidden">
-                    <span class="case-badge">GHL Workflow · 14 pasos</span>
+                    <span class="case-badge" data-i18n="case-badge">GHL Workflow · 14 pasos</span>
                     <img src="assets/Captura_GHL_1.png" alt="Automatización de email marketing en Go High Level" class="w-full h-full object-cover">
                     <div class="play-overlay">
                         <div class="play-btn"><i data-lucide="play" class="h-7 w-7" style="margin-left:3px"></i></div>
                     </div>
                 </div>
                 <div class="mt-3 text-center">
-                    <p class="text-sm font-semibold">Automatización de email marketing — 85 inscritos, 41K+ contactos segmentados</p>
-                    <p class="mt-1 text-xs text-white/50">Haz clic para recorrer, paso a paso, el workflow completo en Go High Level</p>
+                    <p class="text-sm font-semibold" data-i18n="case-title">Automatización de email marketing — 85 inscritos, 41K+ contactos segmentados</p>
+                    <p class="mt-1 text-xs text-white/50" data-i18n="case-subtitle">Haz clic para recorrer, paso a paso, el workflow completo en Go High Level</p>
                 </div>
             </div>
         </div>
@@ -470,9 +597,9 @@
 
     <!-- LIGHTBOX: recorrido del caso GHL -->
     <div id="lightbox" onclick="if(event.target===this) closeLightbox()">
-        <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar"><i data-lucide="x" class="h-5 w-5"></i></button>
-        <button id="lightbox-prev" class="lightbox-arrow" onclick="lightboxNav(-1)" aria-label="Anterior"><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
-        <button id="lightbox-next" class="lightbox-arrow" onclick="lightboxNav(1)" aria-label="Siguiente"><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+        <button id="lightbox-close" onclick="closeLightbox()" data-i18n-aria="aria-cerrar" aria-label="Cerrar"><i data-lucide="x" class="h-5 w-5"></i></button>
+        <button id="lightbox-prev" class="lightbox-arrow" onclick="lightboxNav(-1)" data-i18n-aria="aria-anterior" aria-label="Anterior"><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+        <button id="lightbox-next" class="lightbox-arrow" onclick="lightboxNav(1)" data-i18n-aria="aria-siguiente" aria-label="Siguiente"><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
 
         <span id="lightbox-counter" class="mono"></span>
         <div id="lightbox-frame"><img id="lightbox-img" src="" alt=""></div>
@@ -485,14 +612,14 @@
     <!-- PORTAFOLIO -->
     <section id="portafolio" class="mb-24">
         <div class="max-w-2xl mb-10">
-            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> MUESTRA VISUAL</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Portafolio de trabajos</h2>
-            <p class="mt-3 text-white/60">Despliegue creativo, técnico y de resultados a través de canales.</p>
+            <span class="eyebrow"><span class="dot" style="background:var(--blue)"></span> <span data-i18n="portafolio-eyebrow">MUESTRA VISUAL</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="portafolio-h2">Portafolio de trabajos</h2>
+            <p class="mt-3 text-white/60" data-i18n="portafolio-p">Despliegue creativo, técnico y de resultados a través de canales.</p>
         </div>
 
         <div class="space-y-16">
             <div>
-                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Redes sociales</h3>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)" data-i18n="portafolio-h3-1">Redes sociales</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_4.png" class="portfolio-img"></div>
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-square"><img src="assets/Portafolio_5.png" class="portfolio-img"></div>
@@ -512,7 +639,7 @@
             </div>
 
             <div>
-                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Sitios web</h3>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)" data-i18n="portafolio-h3-2">Sitios web</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_29.png" class="portfolio-img"></div>
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video"><img src="assets/Portafolio_31.png" class="portfolio-img"></div>
@@ -524,14 +651,14 @@
             </div>
 
             <div>
-                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)">Videos de YouTube</h3>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--blue)" data-i18n="portafolio-h3-3">Videos de YouTube</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-black/50 aspect-video p-2 flex items-center justify-center"><img src="assets/Portafolio_35.png" class="portfolio-img-contain"></div>
                 </div>
             </div>
 
             <div>
-                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--green)">Resultados campañas Google Ads</h3>
+                <h3 class="text-xl font-display font-semibold mb-6" style="color:var(--green)" data-i18n="portafolio-h3-4">Resultados campañas Google Ads</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_1.png" class="portfolio-img-contain"></div>
                     <div class="portfolio-item rounded-xl overflow-hidden border border-white/10 bg-white aspect-video p-2 flex items-center justify-center"><img src="assets/Campaign%20performance_2.png" class="portfolio-img-contain"></div>
@@ -545,14 +672,14 @@
     <!-- DASHBOARD + CALCULADORA (al final) -->
     <section id="dashboard" class="mb-20">
         <div class="max-w-2xl mb-10">
-            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> LA PRUEBA EN NÚMEROS</span>
-            <h2 class="mt-4 text-3xl md:text-4xl font-bold">Dashboard de performance</h2>
-            <p class="mt-3 text-white/60">Volumen de conversiones vs. costo de adquisición, campaña por campaña.</p>
+            <span class="eyebrow"><span class="dot" style="background:var(--green)"></span> <span data-i18n="dash-eyebrow">LA PRUEBA EN NÚMEROS</span></span>
+            <h2 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="dash-h2">Dashboard de performance</h2>
+            <p class="mt-3 text-white/60" data-i18n="dash-p">Volumen de conversiones vs. costo de adquisición, campaña por campaña.</p>
         </div>
 
         <div class="card w-full mb-10 p-6">
-            <h3 class="text-lg font-display font-semibold">Google Ads: campañas destacadas</h3>
-            <p class="text-sm text-white/60 mb-4">Muestra del volumen de conversiones y CPA real (proyectos B2B/B2C).</p>
+            <h3 class="text-lg font-display font-semibold" data-i18n="dash-card-h3">Google Ads: campañas destacadas</h3>
+            <p class="text-sm text-white/60 mb-4" data-i18n="dash-card-p">Muestra del volumen de conversiones y CPA real (proyectos B2B/B2C).</p>
             <div id="chart-performance" style="height: 350px; width: 100%;"></div>
         </div>
 
@@ -562,8 +689,8 @@
                     <div class="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-4" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
                         <i data-lucide="calculator" class="h-7 w-7" style="color:var(--green)"></i>
                     </div>
-                    <h2 class="text-2xl md:text-3xl font-bold font-display">Proyección de resultados (ROI Calculator)</h2>
-                    <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto">
+                    <h2 class="text-2xl md:text-3xl font-bold font-display" data-i18n="calc-h2">Proyección de resultados (ROI Calculator)</h2>
+                    <p class="text-white/70 mt-2 text-sm max-w-2xl mx-auto" data-i18n="calc-p">
                         Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas.
                         <br><span style="color:var(--blue)" class="text-xs font-semibold">Infraestructura probada: PMax / Meta Ads + creativos de alto CTR + landing pages (framework AIDA) con Ninja Forms.</span>
                     </p>
@@ -571,27 +698,27 @@
 
                 <div class="bg-black/40 p-6 rounded-2xl border border-white/10">
                     <div class="mb-8">
-                        <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block">1. Selecciona el canal de adquisición</label>
+                        <label class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 block" data-i18n="calc-label1">1. Selecciona el canal de adquisición</label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <label class="cursor-pointer">
                                 <input type="radio" name="calc-channel" value="google" class="peer sr-only" checked onchange="calculateROI()">
                                 <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 transition-all">
                                     <p class="font-bold text-white">Google Ads (PMax)</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPA histórico: ~$5.00</p>
+                                    <p class="text-[10px] text-white/50 mt-1" data-i18n="calc-cpa1">CPA histórico: ~$5.00</p>
                                 </div>
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="calc-channel" value="meta" class="peer sr-only" onchange="calculateROI()">
                                 <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all">
                                     <p class="font-bold text-white">Facebook Ads</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPL histórico: ~$7.00</p>
+                                    <p class="text-[10px] text-white/50 mt-1" data-i18n="calc-cpa2">CPL histórico: ~$7.00</p>
                                 </div>
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="calc-channel" value="omni" class="peer sr-only" onchange="calculateROI()">
                                 <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center hover:bg-white/10 peer-checked:border-emerald-400 peer-checked:bg-emerald-400/10 transition-all">
-                                    <p class="font-bold text-white">Mix omnicanal</p>
-                                    <p class="text-[10px] text-white/50 mt-1">CPL promedio: ~$6.00</p>
+                                    <p class="font-bold text-white" data-i18n="calc-omni">Mix omnicanal</p>
+                                    <p class="text-[10px] text-white/50 mt-1" data-i18n="calc-cpa3">CPL promedio: ~$6.00</p>
                                 </div>
                             </label>
                         </div>
@@ -599,7 +726,7 @@
 
                     <div class="mb-8">
                         <div class="flex justify-between items-end mb-4">
-                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider">2. Inversión mensual estimada</label>
+                            <label class="text-xs font-semibold text-white/60 uppercase tracking-wider" data-i18n="calc-label2">2. Inversión mensual estimada</label>
                             <span class="text-3xl mono font-bold" style="color:var(--green)" id="calc-spend-display">$5,000</span>
                         </div>
                         <input type="range" id="calc-spend" min="1000" max="50000" step="500" value="5000" class="w-full">
@@ -607,21 +734,21 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6">
                         <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Volumen de leads</p>
+                            <p class="text-[10px] text-white/50 uppercase tracking-wider" data-i18n="calc-leads-lbl">Volumen de leads</p>
                             <div class="flex items-baseline gap-2 mt-1">
                                 <p class="text-2xl font-bold text-white" id="calc-leads">0</p>
                                 <p class="text-xs" style="color:var(--blue)">@ <span id="calc-cpl-display">$5</span>/ea</p>
                             </div>
                         </div>
                         <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                            <p class="text-[10px] text-white/50 uppercase tracking-wider">Ventas estimadas</p>
+                            <p class="text-[10px] text-white/50 uppercase tracking-wider" data-i18n="calc-sales-lbl">Ventas estimadas</p>
                             <p class="text-2xl font-bold text-white mt-1" id="calc-sales">0</p>
-                            <p class="text-[9px] text-white/40 mt-1">Asumiendo 5% de cierre</p>
+                            <p class="text-[9px] text-white/40 mt-1" data-i18n="calc-sales-note">Asumiendo 5% de cierre</p>
                         </div>
                         <div class="rounded-xl p-4" style="background:var(--green-soft); border:1px solid rgba(18,209,153,0.3);">
-                            <p class="text-[10px] uppercase tracking-wider" style="color:#8ef0d4">Revenue proyectado</p>
+                            <p class="text-[10px] uppercase tracking-wider" style="color:#8ef0d4" data-i18n="calc-rev-lbl">Revenue proyectado</p>
                             <p class="text-2xl font-bold mt-1" style="color:var(--green)" id="calc-revenue">$0</p>
-                            <p class="text-[9px] mt-1" style="color:#8ef0d4a0">Ticket promedio $1,500</p>
+                            <p class="text-[9px] mt-1" style="color:#8ef0d4a0" data-i18n="calc-rev-note">Ticket promedio $1,500</p>
                         </div>
                     </div>
                 </div>
@@ -632,14 +759,14 @@
     <!-- CTA FINAL -->
     <section class="mb-16">
         <div class="card p-10 md:p-14 text-center" style="background:linear-gradient(135deg, rgba(34,170,255,0.08), rgba(18,209,153,0.10));">
-            <h2 class="text-3xl md:text-4xl font-bold font-display">¿Vas a seguir pagando por tráfico o vas a empezar a medir revenue?</h2>
-            <p class="mt-4 text-white/70 max-w-xl mx-auto">20 minutos son suficientes para que te diga, en base a tu cuenta, dónde está la fuga de presupuesto.</p>
+            <h2 class="text-3xl md:text-4xl font-bold font-display" data-i18n="cta-h2">¿Vas a seguir pagando por tráfico o vas a empezar a medir revenue?</h2>
+            <p class="mt-4 text-white/70 max-w-xl mx-auto" data-i18n="cta-p">20 minutos son suficientes para que te diga, en base a tu cuenta, dónde está la fuga de presupuesto.</p>
             <div class="mt-8 flex flex-wrap justify-center gap-4">
                 <a href="mailto:ricardobarriosmarketing@gmail.com?subject=Agendemos%2020%20minutos" class="btn-primary rounded-lg px-8 py-3.5 text-sm inline-flex items-center gap-2">
-                    <i data-lucide="calendar" class="h-5 w-5"></i> Agenda tu llamada ahora
+                    <i data-lucide="calendar" class="h-5 w-5"></i> <span data-i18n="cta-btn1">Agenda tu llamada ahora</span>
                 </a>
                 <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" class="btn-secondary rounded-lg px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2">
-                    <i data-lucide="download-cloud" class="h-5 w-5"></i> Descargar CV
+                    <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="cta-btn2">Descargar CV</span>
                 </a>
             </div>
         </div>
@@ -647,14 +774,14 @@
 
     <!-- FOOTER -->
     <footer class="border-t py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50" style="border-color:var(--line)">
-        <p>© 2026 Ricardo Barrios — Growth &amp; Performance Marketing</p>
+        <p data-i18n="footer-copy">© 2026 Ricardo Barrios — Growth &amp; Performance Marketing</p>
         <a href="mailto:ricardobarriosmarketing@gmail.com" class="nav-link inline-flex items-center gap-2"><i data-lucide="mail" class="h-4 w-4"></i> ricardobarriosmarketing@gmail.com</a>
     </footer>
 </div>
 
 <!-- Botón flotante CV -->
 <a href="assets/Ricardo_Barrios_CV.pdf" target="_blank" id="float-cv">
-    <i data-lucide="download" class="h-4 w-4"></i> Descargar CV
+    <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="float-cv-text">Descargar CV</span>
 </a>
 
 <script>
@@ -662,11 +789,186 @@
     const fmtMoney = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
     const fmtMoneyDec = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
 
-    window.onload = () => {
-        lucide.createIcons();
+    // ================= I18N =================
+    let currentLang = 'es';
+
+    const I18N = {
+        es: {
+            'nav-problema':'El problema','nav-stack':'Stack','nav-casos':'Casos de estudio','nav-portafolio':'Portafolio','nav-performance':'Performance','nav-cv':'CV',
+            'hero-eyebrow':'GROWTH &amp; PERFORMANCE MARKETING — NIVEL LEAD',
+            'hero-title':'No optimizo campañas.<br>Diseño la máquina que las <span style="color:var(--green)">hace rentables</span>.',
+            'hero-p':'8 años dirigiendo equipos de growth, presupuestos de pauta y sistemas de atribución. Mi trabajo no es "correr anuncios": es construir el sistema completo —pauta, funnel, CRM y reporting— para que sepas exactamente de dónde viene cada dólar de ingreso que entra.',
+            'hero-btn1':'Agenda una llamada de 20 min','hero-btn2':'Descargar CV en PDF',
+            'bottleneck-eyebrow':'DIAGNÓSTICO','bottleneck-h2':'El problema casi nunca es la pauta.',
+            'bottleneck-p':'Es no saber, con precisión de dólar, qué parte del sistema está fallando. Esto es lo que veo repetido en cada auditoría:',
+            'bn1-h3':'Presupuesto sin atribución real','bn1-p':'Se sabe cuánto se gastó. Nadie sabe qué canal, anuncio o landing generó la venta. Sin Hyros o GTM bien implementado, cada decisión de presupuesto es una apuesta.',
+            'bn2-h3':'Equipos operando sin SOPs','bn2-p':'El equipo creativo y de pauta trabaja por intuición, no por proceso. Sin KPIs claros en ClickUp o Monday, escalar solo multiplica el caos.',
+            'bn3-h3':'Landing pages que no cierran','bn3-p':'El tráfico llega, pero el funnel no está diseñado para convertir. Sin un framework de conversión (AIDA) y automatización en GHL, el lead se enfría.',
+            'stack-eyebrow':'INFRAESTRUCTURA','stack-h2':'El sistema que opero, no solo las herramientas.',
+            'stack1-label':'01 · PAUTA &amp; ATRIBUCIÓN','stack1-h3':'Adquisición medible','stack1-li4':'Hyros (atribución multitoque)',
+            'stack2-label':'02 · AUTOMATIZACIÓN &amp; CRM','stack2-h3':'Funnels que trabajan solos','stack2-li3':'Secuencias &amp; nurturing','stack2-li4':'Formularios AIDA (Ninja Forms)',
+            'stack3-label':'03 · OPERACIONES','stack3-h3':'Equipos que no dependen de mí','stack3-li3':'SOPs documentados','stack3-li4':'KPIs por rol y por canal',
+            'stack4-label':'04 · SEO &amp; ANALÍTICA','stack4-h3':'Visibilidad orgánica','stack4-li1':'SEO técnico','stack4-li3':'Reporting ejecutivo','stack4-li4':'Testing continuo de creativos',
+            'casos-eyebrow':'EVIDENCIA, NO PROMESAS','casos-h2':'Casos de estudio',
+            'casos-p':'Cada caso sigue el mismo framework: el contexto en el que entré, la arquitectura que construí, y el resultado financiero que dejó atrás.',
+            'lbl-contexto':'Contexto','lbl-arquitectura':'Arquitectura','lbl-resultado':'Resultado',
+            'caso1-sub':'Vertical: Fencing / Gates — Home Services local (Tampa, FL)','caso1-metric':'conversiones @ $5.49 CPA',
+            'caso1-contexto':'La cuenta dependía de campañas de Search con techo de escala y sin estructura de feed para e-commerce local.',
+            'caso1-arquitectura':'Rediseño completo de la campaña como Performance Max, segmentación por grupos de activos y testing de creativos de alto CTR.',
+            'caso1-resultado':'7,222 conversiones a un CPA de $5.49 — el volumen más alto entre las 4 líneas de campaña activas de la cuenta.',
+            'caso1-ev1':'Evidencia · Resultados en Google Ads','caso1-ev2':'Evidencia · Landing pages diseñadas',
+            'caso2-sub':'Vertical: Educación financiera / comunidad de trading (Forex, cripto, futuros) — Puerto Rico &amp; LATAM','caso2-metric':'revenue atribuido (feb–may 2026)',
+            'caso2-contexto':'Comunidad de trading en expansión activa en Puerto Rico y Latinoamérica, con necesidad de escalar la adquisición de estudiantes sin perder rentabilidad por cada dólar invertido en pauta.',
+            'caso2-arquitectura':'Gestión directa del presupuesto de marketing digital mes a mes, con atribución de revenue por periodo para tomar decisiones de escalado o corte con datos, no con intuición.',
+            'caso2-resultado':'$225,216.50 en revenue atribuido contra $93,516.00 invertidos en 4 meses (feb–may 2026) — un ROAS de 2.41x sostenido mes a mes.',
+            'caso3-hoy':'(hoy <a href="https://vigilanttechs.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:var(--blue)">Vigilant IT</a>)',
+            'caso3-sub':'Vertical: Soporte IT gestionado (Managed IT Services) — Estados Unidos','caso3-metric':'revenue mensual (sep 2021 → prom. 2022–2024)',
+            'caso3-contexto':'Empresa de soporte IT en Estados Unidos, operando bajo estrictas políticas de privacidad financiera: sin acceso directo a la parte contable ni al volumen de llamadas entrantes a oficina.',
+            'caso3-arquitectura':'Gestión sostenida de la estrategia de adquisición durante más de dos años, sin visibilidad total del funnel por las restricciones internas de la compañía — trabajando con los indicadores disponibles para sostener el crecimiento mes a mes.',
+            'caso3-resultado':'Revenue mensual de la compañía escaló de $90,000 en septiembre de 2021 a un promedio de $200,000/mes sostenido entre 2022 y 2024, durante el periodo de mi gestión.',
+            'cv-eyebrow':'RESPALDO','cv-h2':'Curriculum y certificaciones','cv-p':'Trayectoria, avales académicos y respaldo directo de clientes y empleadores anteriores.',
+            'cert-h3':'Certificaciones','cert1-cap':'Google Actívate — Fundamentos de Marketing Digital (40h)',
+            'certp-h3':'Certificaciones en curso','certp-p':'Cursos en proceso — esta sección se actualiza con el certificado correspondiente al finalizar cada uno.',
+            'certp-badge':'En curso',
+            'certp1':'Google Ads — con Alan Valdéz','certp2':'GoHighLevel Masterclass: From Beginner to Expert',
+            'certp3':'Zoho CRM User Training Course — Beginner to Expert','certp4':'GHL Service Pro Roadmap','certp5':'Conversion Tracking for Digital Marketing',
+            'letters-h3':'Cartas de recomendación','letter1-role':'Dariel Concepción — President','btn-verpdf':'Ver PDF',
+            'showreel-eyebrow':'EN VIVO','showreel-h2':'Showreel &amp; casos explicados',
+            'video1-cap':'Resumen de gestión y liderazgo','video2-cap':'Análisis técnico y setup de automatizaciones',
+            'showreel-aria':'Ver recorrido paso a paso del workflow de GHL','case-badge':'GHL Workflow · 14 pasos',
+            'case-title':'Automatización de email marketing — 85 inscritos, 41K+ contactos segmentados',
+            'case-subtitle':'Haz clic para recorrer, paso a paso, el workflow completo en Go High Level',
+            'aria-cerrar':'Cerrar','aria-anterior':'Anterior','aria-siguiente':'Siguiente',
+            'portafolio-eyebrow':'MUESTRA VISUAL','portafolio-h2':'Portafolio de trabajos',
+            'portafolio-p':'Despliegue creativo, técnico y de resultados a través de canales.',
+            'portafolio-h3-1':'Redes sociales','portafolio-h3-2':'Sitios web','portafolio-h3-3':'Videos de YouTube','portafolio-h3-4':'Resultados campañas Google Ads',
+            'dash-eyebrow':'LA PRUEBA EN NÚMEROS','dash-h2':'Dashboard de performance',
+            'dash-p':'Volumen de conversiones vs. costo de adquisición, campaña por campaña.',
+            'dash-card-h3':'Google Ads: campañas destacadas','dash-card-p':'Muestra del volumen de conversiones y CPA real (proyectos B2B/B2C).',
+            'calc-h2':'Proyección de resultados (ROI Calculator)',
+            'calc-p':'Simula el impacto de mi gestión basado en el rendimiento histórico real de mis campañas.<br><span style="color:var(--blue)" class="text-xs font-semibold">Infraestructura probada: PMax / Meta Ads + creativos de alto CTR + landing pages (framework AIDA) con Ninja Forms.</span>',
+            'calc-label1':'1. Selecciona el canal de adquisición','calc-cpa1':'CPA histórico: ~$5.00','calc-cpa2':'CPL histórico: ~$7.00','calc-omni':'Mix omnicanal','calc-cpa3':'CPL promedio: ~$6.00',
+            'calc-label2':'2. Inversión mensual estimada','calc-leads-lbl':'Volumen de leads','calc-sales-lbl':'Ventas estimadas','calc-sales-note':'Asumiendo 5% de cierre',
+            'calc-rev-lbl':'Revenue proyectado','calc-rev-note':'Ticket promedio $1,500',
+            'cta-h2':'¿Vas a seguir pagando por tráfico o vas a empezar a medir revenue?',
+            'cta-p':'20 minutos son suficientes para que te diga, en base a tu cuenta, dónde está la fuga de presupuesto.',
+            'cta-btn1':'Agenda tu llamada ahora','cta-btn2':'Descargar CV',
+            'footer-copy':'© 2026 Ricardo Barrios — Growth &amp; Performance Marketing','float-cv-text':'Descargar CV',
+        },
+        en: {
+            'nav-problema':'The problem','nav-stack':'Stack','nav-casos':'Case studies','nav-portafolio':'Portfolio','nav-performance':'Performance','nav-cv':'Resume',
+            'hero-eyebrow':'GROWTH &amp; PERFORMANCE MARKETING — LEAD LEVEL',
+            'hero-title':'I don\u2019t optimize campaigns.<br>I engineer the machine that <span style="color:var(--green)">makes them profitable</span>.',
+            'hero-p':'8 years leading growth teams, ad budgets, and attribution systems. My job isn\u2019t "running ads" — it\u2019s building the full system —paid media, funnel, CRM, and reporting— so you know exactly where every dollar of revenue comes from.',
+            'hero-btn1':'Book a 20-min call','hero-btn2':'Download Resume (PDF)',
+            'bottleneck-eyebrow':'DIAGNOSIS','bottleneck-h2':'The problem is almost never the ad spend.',
+            'bottleneck-p':'It\u2019s not knowing, with dollar-level precision, which part of the system is failing. This is what I see repeated in every audit:',
+            'bn1-h3':'Budget with no real attribution','bn1-p':'Everyone knows how much was spent. No one knows which channel, ad, or landing page drove the sale. Without Hyros or GTM properly set up, every budget decision is a bet.',
+            'bn2-h3':'Teams operating without SOPs','bn2-p':'The creative and paid media team works on gut feeling, not process. Without clear KPIs in ClickUp or Monday, scaling only multiplies the chaos.',
+            'bn3-h3':'Landing pages that don\u2019t close','bn3-p':'Traffic arrives, but the funnel isn\u2019t built to convert. Without a conversion framework (AIDA) and automation in GHL, the lead goes cold.',
+            'stack-eyebrow':'INFRASTRUCTURE','stack-h2':'The system I run, not just the tools.',
+            'stack1-label':'01 · PAID MEDIA &amp; ATTRIBUTION','stack1-h3':'Measurable acquisition','stack1-li4':'Hyros (multi-touch attribution)',
+            'stack2-label':'02 · AUTOMATION &amp; CRM','stack2-h3':'Funnels that run themselves','stack2-li3':'Sequences &amp; nurturing','stack2-li4':'AIDA forms (Ninja Forms)',
+            'stack3-label':'03 · OPERATIONS','stack3-h3':'Teams that don\u2019t depend on me','stack3-li3':'Documented SOPs','stack3-li4':'KPIs by role and channel',
+            'stack4-label':'04 · SEO &amp; ANALYTICS','stack4-h3':'Organic visibility','stack4-li1':'Technical SEO','stack4-li3':'Executive reporting','stack4-li4':'Continuous creative testing',
+            'casos-eyebrow':'EVIDENCE, NOT PROMISES','casos-h2':'Case studies',
+            'casos-p':'Every case follows the same framework: the context I stepped into, the architecture I built, and the financial result it left behind.',
+            'lbl-contexto':'Context','lbl-arquitectura':'Architecture','lbl-resultado':'Result',
+            'caso1-sub':'Vertical: Fencing / Gates — Local Home Services (Tampa, FL)','caso1-metric':'conversions @ $5.49 CPA',
+            'caso1-contexto':'The account relied on Search campaigns with a scaling ceiling and no feed structure for local e-commerce.',
+            'caso1-arquitectura':'Full campaign redesign as Performance Max, asset-group segmentation, and high-CTR creative testing.',
+            'caso1-resultado':'7,222 conversions at a $5.49 CPA — the highest volume among the account\u2019s 4 active campaign lines.',
+            'caso1-ev1':'Evidence · Google Ads results','caso1-ev2':'Evidence · Landing pages designed',
+            'caso2-sub':'Vertical: Financial education / trading community (Forex, crypto, futures) — Puerto Rico &amp; LATAM','caso2-metric':'attributed revenue (Feb–May 2026)',
+            'caso2-contexto':'Actively expanding trading community in Puerto Rico and Latin America, needing to scale student acquisition without losing profitability on every dollar spent on ads.',
+            'caso2-arquitectura':'Direct month-to-month management of the digital marketing budget, with revenue attribution per period to make scale-or-cut decisions based on data, not intuition.',
+            'caso2-resultado':'$225,216.50 in attributed revenue against $93,516.00 invested over 4 months (Feb–May 2026) — a 2.41x ROAS sustained month over month.',
+            'caso3-hoy':'(now <a href="https://vigilanttechs.com" target="_blank" class="underline decoration-dotted hover:text-white" style="color:var(--blue)">Vigilant IT</a>)',
+            'caso3-sub':'Vertical: Managed IT Support (Managed IT Services) — United States','caso3-metric':'monthly revenue (Sep 2021 → avg. 2022–2024)',
+            'caso3-contexto':'IT support company in the United States, operating under strict financial privacy policies: no direct access to accounting or to the volume of inbound calls to the office.',
+            'caso3-arquitectura':'Sustained management of the acquisition strategy for over two years, without full funnel visibility due to the company\u2019s internal restrictions — working with the indicators available to sustain month-over-month growth.',
+            'caso3-resultado':'Company monthly revenue scaled from $90,000 in September 2021 to an average of $200,000/month sustained between 2022 and 2024, during my management period.',
+            'cv-eyebrow':'BACKED BY','cv-h2':'Resume &amp; certifications','cv-p':'Track record, academic credentials, and direct backing from past clients and employers.',
+            'cert-h3':'Certifications','cert1-cap':'Google Actívate — Digital Marketing Fundamentals (40h)',
+            'certp-h3':'Currently earning','certp-p':'Courses in progress — this section will be updated with each certificate upon completion.',
+            'certp-badge':'In progress',
+            'certp1':'Google Ads — with Alan Valdéz','certp2':'GoHighLevel Masterclass: From Beginner to Expert',
+            'certp3':'Zoho CRM User Training Course — Beginner to Expert','certp4':'GHL Service Pro Roadmap','certp5':'Conversion Tracking for Digital Marketing',
+            'letters-h3':'Letters of recommendation','letter1-role':'Dariel Concepción — President','btn-verpdf':'View PDF',
+            'showreel-eyebrow':'LIVE','showreel-h2':'Showreel &amp; case walkthroughs',
+            'video1-cap':'Management &amp; leadership overview','video2-cap':'Technical analysis &amp; automation setup',
+            'showreel-aria':'Walk through the GHL workflow step by step','case-badge':'GHL Workflow · 14 steps',
+            'case-title':'Email marketing automation — 85 sign-ups, 41K+ contacts segmented',
+            'case-subtitle':'Click to walk through the entire Go High Level workflow, step by step',
+            'aria-cerrar':'Close','aria-anterior':'Previous','aria-siguiente':'Next',
+            'portafolio-eyebrow':'VISUAL SAMPLE','portafolio-h2':'Portfolio of work',
+            'portafolio-p':'Creative, technical, and results-driven work across channels.',
+            'portafolio-h3-1':'Social media','portafolio-h3-2':'Websites','portafolio-h3-3':'YouTube videos','portafolio-h3-4':'Google Ads campaign results',
+            'dash-eyebrow':'THE PROOF IN NUMBERS','dash-h2':'Performance dashboard',
+            'dash-p':'Conversion volume vs. acquisition cost, campaign by campaign.',
+            'dash-card-h3':'Google Ads: featured campaigns','dash-card-p':'Sample of conversion volume and real CPA (B2B/B2C projects).',
+            'calc-h2':'Results projection (ROI Calculator)',
+            'calc-p':'Simulate the impact of my management based on the real historical performance of my campaigns.<br><span style="color:var(--blue)" class="text-xs font-semibold">Proven infrastructure: PMax / Meta Ads + high-CTR creatives + landing pages (AIDA framework) with Ninja Forms.</span>',
+            'calc-label1':'1. Select the acquisition channel','calc-cpa1':'Historical CPA: ~$5.00','calc-cpa2':'Historical CPL: ~$7.00','calc-omni':'Omnichannel mix','calc-cpa3':'Average CPL: ~$6.00',
+            'calc-label2':'2. Estimated monthly investment','calc-leads-lbl':'Lead volume','calc-sales-lbl':'Estimated sales','calc-sales-note':'Assuming 5% close rate',
+            'calc-rev-lbl':'Projected revenue','calc-rev-note':'Average ticket $1,500',
+            'cta-h2':'Will you keep paying for traffic, or start measuring revenue?',
+            'cta-p':'20 minutes is enough for me to tell you, based on your account, where the budget is leaking.',
+            'cta-btn1':'Book your call now','cta-btn2':'Download Resume',
+            'footer-copy':'© 2026 Ricardo Barrios — Growth &amp; Performance Marketing','float-cv-text':'Download Resume',
+        }
+    };
+
+    function detectInitialLang(){
+        try {
+            const saved = localStorage.getItem('rb_lang');
+            if (saved === 'es' || saved === 'en') return saved;
+        } catch(e) {}
+        const nav = ((navigator.language || navigator.userLanguage || 'es') + '').toLowerCase();
+        return nav.startsWith('en') ? 'en' : 'es';
+    }
+
+    function applyLang(lang){
+        currentLang = (lang === 'en') ? 'en' : 'es';
+        document.documentElement.lang = currentLang;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const val = I18N[currentLang][key];
+            if (val !== undefined) el.innerHTML = val;
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria');
+            const val = I18N[currentLang][key];
+            if (val !== undefined) el.setAttribute('aria-label', val);
+        });
+
+        const esBtn = document.getElementById('lang-es-btn');
+        const enBtn = document.getElementById('lang-en-btn');
+        if (esBtn && enBtn){
+            esBtn.classList.toggle('active', currentLang === 'es');
+            enBtn.classList.toggle('active', currentLang === 'en');
+        }
+
+        try { localStorage.setItem('rb_lang', currentLang); } catch(e) {}
+
+        // Re-render dynamic (JS-generated) content in the new language
+        buildTicker();
         renderAdsChart();
         renderCaso2Chart();
-        buildTicker();
+        if (document.getElementById('lightbox').classList.contains('open')) renderLightboxFrame();
+
+        lucide.createIcons();
+    }
+
+    function toggleLang(lang){
+        applyLang(lang);
+    }
+    // ================= /I18N =================
+
+    window.onload = () => {
+        lucide.createIcons();
+        applyLang(detectInitialLang());
 
         const slider = document.getElementById('calc-spend');
         slider.addEventListener('input', calculateROI);
@@ -679,32 +981,61 @@
         });
     };
 
-    // --- Lightbox: caso GHL paso a paso ---
+    // --- Lightbox: caso GHL paso a paso (bilingüe) ---
     const ghlFrames = [
-        { src:'assets/Captura_GHL_1.png', title:'Trigger & exclusión inicial', text:'El flujo arranca cuando se añade el tag de nuevo lead. Antes de enviar nada, un nodo condicional excluye a quien ya tiene el tag de una oferta anterior, evitando duplicar mensajes a leads ya trabajados.' },
-        { src:'assets/Captura_GHL_2.png', title:'Checkpoint de re-etiquetado', text:'Después del primer correo y una espera, el flujo vuelve a preguntar si el contacto ya tiene el tag del evento vigente, para no seguir enviando la secuencia a quien ya se marcó como inscrito.' },
-        { src:'assets/Captura_GHL_3.png', title:'Sincronización por fecha fija', text:'Configuré los nodos de espera para disparar en una fecha y hora exacta —no en un delay relativo—, clave para alinear los correos de cuenta regresiva con el horario real del evento en vivo.' },
-        { src:'assets/Captura_GHL_4.png', title:'Segmentación de exclusión', text:'Sobre una base de más de 41,000 contactos, apliqué filtros anidados para excluir a quienes ya pertenecían a una oferta o membresía anterior, protegiendo la reputación del dominio y la experiencia de clientes existentes.' },
-        { src:'assets/Captura_GHL_5.png', title:'Verificación del segmento final', text:'Tras aplicar los filtros, validé el conteo resultante de contactos elegibles antes de activar cualquier envío masivo — un control de calidad sobre la audiencia real que recibiría la campaña.' },
-        { src:'assets/Captura_GHL_7.png', title:'Historial de ejecución', text:'Cada acción masiva (tags y correos) queda registrada con su estado y responsable, lo que permite auditar en tiempo real qué se envió, cuándo y a quién, sin depender de suposiciones.' },
-        { src:'assets/Captura_GHL_8.png', title:'Lógica de la condición', text:'Detalle del nodo de exclusión: la condición se cumple solo si el contacto tiene todos los tags seleccionados dentro de la rama, evitando falsos positivos en la segmentación.' },
-        { src:'assets/Captura_GHL_9.png', title:'Control anti-saturación', text:'Activé la opción que salta automáticamente los envíos salientes pendientes si la fecha ya pasó, evitando que un contacto reciba correos de urgencia fuera de tiempo.' },
-        { src:'assets/Captura_GHL_10.png', title:'Repetición del patrón por día de evento', text:'El mismo bloque de espera + verificación de tag se replica para cada uno de los 3 días del LIVE TRAINING, ajustando solo la fecha y el copy del correo correspondiente.' },
-        { src:'assets/Captura_GHL_11.png', title:'Flujo post-compra: recordatorios previos', text:'Para quienes ya compraron, programé recordatorios anclados a la fecha del evento (7 días antes), incluyendo el link de acceso y una invitación a referir a un amigo.' },
-        { src:'assets/Captura_GHL_12.png', title:'Tracking de conversión', text:'Cada compra dispara el registro automático en una hoja de cálculo y la creación de una oportunidad en el CRM, generando trazabilidad completa de cada venta sin trabajo manual.' },
-        { src:'assets/Captura_GHL_Recovery.png', title:'Flujo de Recovery — enrutamiento', text:'Los leads que hicieron optin pero no compraron se reincorporan a un workflow de asignación general de leads, dándole visibilidad al equipo comercial sobre ellos también.' },
-        { src:'assets/Captura_GHL_Recovery_2.png', title:'Secuencia de recuperación (3 correos)', text:'Diseñé una secuencia de 3 correos espaciados en días consecutivos para recuperar conversiones de quienes mostraron interés (optin) pero no completaron la compra.' },
-        { src:'assets/Captura_GHL_Recovery_3.png', title:'Trigger del flujo de Recovery', text:'El disparador es el envío del formulario de registro al evento; desde ahí el contacto entra automáticamente a la secuencia de recuperación en paralelo al resto del funnel.' },
+        { src:'assets/Captura_GHL_1.png',
+          es:{ title:'Trigger & exclusión inicial', text:'El flujo arranca cuando se añade el tag de nuevo lead. Antes de enviar nada, un nodo condicional excluye a quien ya tiene el tag de una oferta anterior, evitando duplicar mensajes a leads ya trabajados.' },
+          en:{ title:'Trigger & initial exclusion', text:'The flow starts when the "new lead" tag is added. Before sending anything, a conditional node excludes anyone who already has a tag from a previous offer, avoiding duplicate messages to leads already worked.' } },
+        { src:'assets/Captura_GHL_2.png',
+          es:{ title:'Checkpoint de re-etiquetado', text:'Después del primer correo y una espera, el flujo vuelve a preguntar si el contacto ya tiene el tag del evento vigente, para no seguir enviando la secuencia a quien ya se marcó como inscrito.' },
+          en:{ title:'Re-tagging checkpoint', text:'After the first email and a wait step, the flow checks again whether the contact already has the current event tag, so the sequence stops for anyone already marked as registered.' } },
+        { src:'assets/Captura_GHL_3.png',
+          es:{ title:'Sincronización por fecha fija', text:'Configuré los nodos de espera para disparar en una fecha y hora exacta —no en un delay relativo—, clave para alinear los correos de cuenta regresiva con el horario real del evento en vivo.' },
+          en:{ title:'Fixed-date synchronization', text:'I configured the wait nodes to fire on an exact date and time — not a relative delay — key to aligning the countdown emails with the real schedule of the live event.' } },
+        { src:'assets/Captura_GHL_4.png',
+          es:{ title:'Segmentación de exclusión', text:'Sobre una base de más de 41,000 contactos, apliqué filtros anidados para excluir a quienes ya pertenecían a una oferta o membresía anterior, protegiendo la reputación del dominio y la experiencia de clientes existentes.' },
+          en:{ title:'Exclusion segmentation', text:'On a database of 41,000+ contacts, I applied nested filters to exclude anyone already part of a previous offer or membership, protecting domain reputation and the experience of existing customers.' } },
+        { src:'assets/Captura_GHL_5.png',
+          es:{ title:'Verificación del segmento final', text:'Tras aplicar los filtros, validé el conteo resultante de contactos elegibles antes de activar cualquier envío masivo — un control de calidad sobre la audiencia real que recibiría la campaña.' },
+          en:{ title:'Final segment verification', text:'After applying the filters, I validated the resulting count of eligible contacts before activating any mass send — a quality check on the real audience that would receive the campaign.' } },
+        { src:'assets/Captura_GHL_7.png',
+          es:{ title:'Historial de ejecución', text:'Cada acción masiva (tags y correos) queda registrada con su estado y responsable, lo que permite auditar en tiempo real qué se envió, cuándo y a quién, sin depender de suposiciones.' },
+          en:{ title:'Execution history', text:'Every bulk action (tags and emails) is logged with its status and owner, allowing real-time auditing of what was sent, when, and to whom — no guesswork required.' } },
+        { src:'assets/Captura_GHL_8.png',
+          es:{ title:'Lógica de la condición', text:'Detalle del nodo de exclusión: la condición se cumple solo si el contacto tiene todos los tags seleccionados dentro de la rama, evitando falsos positivos en la segmentación.' },
+          en:{ title:'Condition logic detail', text:'Detail of the exclusion node: the condition is met only if the contact has all the tags selected within the branch, avoiding false positives in segmentation.' } },
+        { src:'assets/Captura_GHL_9.png',
+          es:{ title:'Control anti-saturación', text:'Activé la opción que salta automáticamente los envíos salientes pendientes si la fecha ya pasó, evitando que un contacto reciba correos de urgencia fuera de tiempo.' },
+          en:{ title:'Anti-oversaturation control', text:'I enabled the option that automatically skips pending outbound sends if the date has already passed, preventing a contact from receiving urgency emails out of sync with the event.' } },
+        { src:'assets/Captura_GHL_10.png',
+          es:{ title:'Repetición del patrón por día de evento', text:'El mismo bloque de espera + verificación de tag se replica para cada uno de los 3 días del LIVE TRAINING, ajustando solo la fecha y el copy del correo correspondiente.' },
+          en:{ title:'Pattern repeated per event day', text:'The same wait + tag-check block is replicated for each of the 3 days of the LIVE TRAINING, adjusting only the date and the corresponding email copy.' } },
+        { src:'assets/Captura_GHL_11.png',
+          es:{ title:'Flujo post-compra: recordatorios previos', text:'Para quienes ya compraron, programé recordatorios anclados a la fecha del evento (7 días antes), incluyendo el link de acceso y una invitación a referir a un amigo.' },
+          en:{ title:'Post-purchase flow: pre-event reminders', text:'For those who already purchased, I scheduled reminders anchored to the event date (7 days prior), including the access link and an invitation to refer a friend.' } },
+        { src:'assets/Captura_GHL_12.png',
+          es:{ title:'Tracking de conversión', text:'Cada compra dispara el registro automático en una hoja de cálculo y la creación de una oportunidad en el CRM, generando trazabilidad completa de cada venta sin trabajo manual.' },
+          en:{ title:'Conversion tracking', text:'Every purchase triggers an automatic entry in a spreadsheet and the creation of an opportunity in the CRM, giving full traceability of every sale with zero manual work.' } },
+        { src:'assets/Captura_GHL_Recovery.png',
+          es:{ title:'Flujo de Recovery — enrutamiento', text:'Los leads que hicieron optin pero no compraron se reincorporan a un workflow de asignación general de leads, dándole visibilidad al equipo comercial sobre ellos también.' },
+          en:{ title:'Recovery flow — routing', text:'Leads who opted in but didn\u2019t purchase are routed back into a general lead-assignment workflow, giving the sales team visibility on them as well.' } },
+        { src:'assets/Captura_GHL_Recovery_2.png',
+          es:{ title:'Secuencia de recuperación (3 correos)', text:'Diseñé una secuencia de 3 correos espaciados en días consecutivos para recuperar conversiones de quienes mostraron interés (optin) pero no completaron la compra.' },
+          en:{ title:'Recovery sequence (3 emails)', text:'I designed a 3-email sequence spaced across consecutive days to recover conversions from people who showed interest (opted in) but didn\u2019t complete the purchase.' } },
+        { src:'assets/Captura_GHL_Recovery_3.png',
+          es:{ title:'Trigger del flujo de Recovery', text:'El disparador es el envío del formulario de registro al evento; desde ahí el contacto entra automáticamente a la secuencia de recuperación en paralelo al resto del funnel.' },
+          en:{ title:'Recovery flow trigger', text:'The trigger is the event registration form submission; from there the contact automatically enters the recovery sequence in parallel with the rest of the funnel.' } },
     ];
     let lightboxIndex = 0;
 
     function renderLightboxFrame(){
         const total = ghlFrames.length;
         const frame = ghlFrames[lightboxIndex];
+        const copy = frame[currentLang] || frame.es;
         document.getElementById('lightbox-img').src = frame.src;
-        document.getElementById('lightbox-img').alt = frame.title;
-        document.getElementById('lightbox-step-label').innerText = frame.title;
-        document.getElementById('lightbox-step-text').innerText = frame.text;
+        document.getElementById('lightbox-img').alt = copy.title;
+        document.getElementById('lightbox-step-label').innerText = copy.title;
+        document.getElementById('lightbox-step-text').innerText = copy.text;
         document.getElementById('lightbox-counter').innerText =
             String(lightboxIndex + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
     }
@@ -735,8 +1066,8 @@
         if (e.key === 'ArrowLeft') lightboxNav(-1);
     });
 
-    function buildTicker() {
-        const items = [
+    const tickerItemsByLang = {
+        es: [
             { label: '7,222 CONVERSIONES', sub: 'Vilo Fence · PMax', color: 'var(--green)' },
             { label: 'CPA $3.06', sub: 'Mejor campaña (Gate)', color: 'var(--blue)' },
             { label: 'ROAS 2.41X', sub: 'Luis Feliz Caballero · feb–may 2026', color: 'var(--green)' },
@@ -745,7 +1076,21 @@
             { label: 'STACK', sub: 'Google Ads · Meta Ads · GHL · Hyros · GTM', color: 'var(--blue)' },
             { label: '8 AÑOS', sub: 'Liderando equipos de growth', color: 'var(--green)' },
             { label: 'ATRIBUCIÓN', sub: 'De cada dólar de presupuesto a cada dólar de revenue', color: 'var(--blue)' },
-        ];
+        ],
+        en: [
+            { label: '7,222 CONVERSIONS', sub: 'Vilo Fence · PMax', color: 'var(--green)' },
+            { label: 'CPA $3.06', sub: 'Best campaign (Gate)', color: 'var(--blue)' },
+            { label: 'ROAS 2.41X', sub: 'Luis Feliz Caballero · Feb–May 2026', color: 'var(--green)' },
+            { label: '$90K → $200K/MO', sub: 'SOS Support (Vigilant IT) · 2021–2024', color: 'var(--blue)' },
+            { label: '11,310 TOTAL CONVERSIONS', sub: '4 active campaign lines', color: 'var(--green)' },
+            { label: 'STACK', sub: 'Google Ads · Meta Ads · GHL · Hyros · GTM', color: 'var(--blue)' },
+            { label: '8 YEARS', sub: 'Leading growth teams', color: 'var(--green)' },
+            { label: 'ATTRIBUTION', sub: 'From every dollar of spend to every dollar of revenue', color: 'var(--blue)' },
+        ],
+    };
+
+    function buildTicker() {
+        const items = tickerItemsByLang[currentLang] || tickerItemsByLang.es;
         const track = document.getElementById('ticker-track');
         const renderSet = () => items.map(it => `
             <div class="ticker-item">
@@ -758,16 +1103,20 @@
     }
 
     function renderCaso2Chart() {
-        const meses = ['Febrero', 'Marzo', 'Abril', 'Mayo'];
+        const meses = currentLang === 'en'
+            ? ['February', 'March', 'April', 'May']
+            : ['Febrero', 'Marzo', 'Abril', 'Mayo'];
         const revenue = [80046, 39414.50, 56338.50, 49417.50];
         const marketing = [37805.10, 19487.26, 18948.45, 17275.19];
+        const revLabel = currentLang === 'en' ? 'Attributed revenue' : 'Revenue atribuido';
+        const invLabel = currentLang === 'en' ? 'Marketing investment' : 'Inversión en marketing';
 
         const trace1 = {
-            x: meses, y: revenue, name: 'Revenue atribuido', type: 'bar',
+            x: meses, y: revenue, name: revLabel, type: 'bar',
             marker: { color: '#12d199', opacity: 0.9 },
         };
         const trace2 = {
-            x: meses, y: marketing, name: 'Inversión en marketing', type: 'bar',
+            x: meses, y: marketing, name: invLabel, type: 'bar',
             marker: { color: '#22aaff', opacity: 0.85 },
         };
         const layout = {
@@ -810,12 +1159,16 @@
     }
 
     function renderAdsChart() {
-        const campañas = ['Perf. Max (Vilo Fence)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Instalaciones)'];
+        const campañas = currentLang === 'en'
+            ? ['Perf. Max (Vilo Fence)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Installs)']
+            : ['Perf. Max (Vilo Fence)', 'Perf. Max (Materials)', 'Perf. Max (Gate)', 'Search (Instalaciones)'];
         const conversiones = [7222, 2045, 649, 1394];
         const cpAs = [5.49, 3.39, 3.06, 4.85];
+        const volLabel = currentLang === 'en' ? 'Conversion volume' : 'Volumen de conversiones';
+        const yAxisLabel = currentLang === 'en' ? 'Total conversions' : 'Conversiones totales';
 
         const trace1 = {
-            x: campañas, y: conversiones, name: 'Volumen de conversiones', type: 'bar',
+            x: campañas, y: conversiones, name: volLabel, type: 'bar',
             marker: { color: '#22aaff', opacity: 0.9 },
         };
         const trace2 = {
@@ -830,7 +1183,7 @@
             margin: { l: 50, r: 50, t: 30, b: 60 },
             legend: { orientation: 'h', y: -0.2 },
             xaxis: { gridcolor: 'rgba(255,255,255,0.05)' },
-            yaxis: { title: 'Conversiones totales', gridcolor: 'rgba(255,255,255,0.05)' },
+            yaxis: { title: yAxisLabel, gridcolor: 'rgba(255,255,255,0.05)' },
             yaxis2: { title: 'CPA ($)', overlaying: 'y', side: 'right', showgrid: false, range: [0, 10] }
         };
         Plotly.newPlot('chart-performance', [trace1, trace2], layout, { responsive: true, displayModeBar: false });
