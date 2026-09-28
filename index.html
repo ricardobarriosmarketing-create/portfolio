@@ -203,7 +203,7 @@
                 <button id="lang-es-btn" class="lang-btn" onclick="toggleLang('es')">ES</button>
                 <button id="lang-en-btn" class="lang-btn" onclick="toggleLang('en')">EN</button>
             </div>
-            <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="btn-primary text-xs md:text-sm rounded-lg px-4 py-2 inline-flex items-center gap-2">
+            <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="cv-link btn-primary text-xs md:text-sm rounded-lg px-4 py-2 inline-flex items-center gap-2">
                 <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="nav-cv">CV</span>
             </a>
         </div>
@@ -229,7 +229,7 @@
                 <a href="https://calendar.app.google/rhLGdz9SGiHL5vs19" target="_blank" rel="noopener" class="btn-primary rounded-lg px-6 py-3 text-sm inline-flex items-center gap-2">
                     <i data-lucide="calendar" class="h-5 w-5"></i> <span data-i18n="hero-btn1">Agenda una llamada de 20 min</span>
                 </a>
-                <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
+                <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="cv-link btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
                     <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="hero-btn2">Descargar CV en PDF</span>
                 </a>
             </div>
@@ -602,6 +602,15 @@
         <div class="card flex justify-center bg-white/5 p-4 md:p-8">
             <img src="assets/Curriculum%20Vitae%20PNG.png" alt="Curriculum Vitae Ricardo Barrios" class="rounded-xl shadow-2xl max-w-full h-auto border border-white/10">
         </div>
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+            <a href="assets/Ricardo_Barrios_CV_Español.docx" target="_blank" class="btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
+                <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="cv-btn-es">Descargar CV en Español (ATS)</span>
+            </a>
+            <a href="assets/Ricardo_Barrios_CV_2026.docx" target="_blank" class="btn-secondary rounded-lg px-6 py-3 text-sm font-semibold inline-flex items-center gap-2">
+                <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="cv-btn-en">Download CV in English (ATS)</span>
+            </a>
+        </div>
+        <p class="text-center text-xs mono text-white/40 mt-3" data-i18n="cv-ats-note">Formato optimizado para lectura por software ATS (Applicant Tracking System).</p>
 
         <!-- Certificaciones -->
         <div class="mt-12">
@@ -1055,7 +1064,7 @@
                 <a href="https://calendar.app.google/rhLGdz9SGiHL5vs19" target="_blank" rel="noopener" class="btn-primary rounded-lg px-8 py-3.5 text-sm inline-flex items-center gap-2">
                     <i data-lucide="calendar" class="h-5 w-5"></i> <span data-i18n="cta-btn1">Agenda tu llamada ahora</span>
                 </a>
-                <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="btn-secondary rounded-lg px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2">
+                <a href="assets/Curriculum%20Vitae.pdf" target="_blank" class="cv-link btn-secondary rounded-lg px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2">
                     <i data-lucide="download-cloud" class="h-5 w-5"></i> <span data-i18n="cta-btn2">Descargar CV</span>
                 </a>
             </div>
@@ -1070,7 +1079,7 @@
 </div>
 
 <!-- Botón flotante CV -->
-<a href="assets/Curriculum%20Vitae.pdf" target="_blank" id="float-cv">
+<a href="assets/Curriculum%20Vitae.pdf" target="_blank" id="float-cv" class="cv-link">
     <i data-lucide="download" class="h-4 w-4"></i> <span data-i18n="float-cv-text">Descargar CV</span>
 </a>
 
@@ -1117,6 +1126,8 @@
             'caso3-arquitectura':'Gestión sostenida de la estrategia de adquisición durante más de dos años, sin visibilidad total del funnel por las restricciones internas de la compañía — trabajando con los indicadores disponibles para sostener el crecimiento mes a mes.',
             'caso3-resultado':'Revenue mensual de la compañía escaló de $90,000 en septiembre de 2021 a un promedio de $200,000/mes sostenido entre 2022 y 2024, durante el periodo de mi gestión.',
             'cv-eyebrow':'RESPALDO','cv-h2':'Curriculum y certificaciones','cv-p':'Trayectoria, avales académicos y respaldo directo de clientes y empleadores anteriores.',
+            'cv-btn-es':'Descargar CV en Español (ATS)','cv-btn-en':'Descargar CV en Inglés (ATS)',
+            'cv-ats-note':'Formato optimizado para lectura por software ATS (Applicant Tracking System).',
             'cert-h3':'Certificaciones','cert1-cap':'Google Actívate — Fundamentos de Marketing Digital (40h)',
             'certp-h3':'Otros certificados',
             'certp1':'Google Ads — con Alan Valdéz','certp2':'GoHighLevel Masterclass: From Beginner to Expert',
@@ -1221,6 +1232,8 @@
             'caso7-arquitectura':'Management of legal lead campaigns with audience testing and budget reallocation based on the performance of each language segment.',
             'caso7-resultado':'121 leads generated with $2,895.44 invested between August 27 and September 14, 2026.',
             'cv-eyebrow':'BACKED BY','cv-h2':'Resume &amp; certifications','cv-p':'Track record, academic credentials, and direct backing from past clients and employers.',
+            'cv-btn-es':'Download Resume in Spanish (ATS)','cv-btn-en':'Download Resume in English (ATS)',
+            'cv-ats-note':'ATS (Applicant Tracking System) optimized format.',
             'cert-h3':'Certifications','cert1-cap':'Google Actívate — Digital Marketing Fundamentals (40h)',
             'certp-h3':'Other certificates',
             'certp1':'Google Ads — with Alan Valdéz','certp2':'GoHighLevel Masterclass: From Beginner to Expert',
@@ -1305,6 +1318,9 @@
         }
 
         try { localStorage.setItem('rb_lang', currentLang); } catch(e) {}
+
+        const cvFile = (currentLang === 'en') ? 'assets/Ricardo_Barrios_CV_2026.docx' : 'assets/Ricardo_Barrios_CV_Español.docx';
+        document.querySelectorAll('.cv-link').forEach(el => { el.setAttribute('href', cvFile); });
 
         // Re-render dynamic (JS-generated) content in the new language
         buildTicker();
